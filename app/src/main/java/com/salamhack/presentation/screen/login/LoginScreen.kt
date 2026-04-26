@@ -90,11 +90,8 @@ fun LoginScreen(
                     )
                     Text(
                         text = "وصول موثوق وآمن لحساباتك المصرفية.",
-                        style = TextStyle(
-                            fontFamily = ibm,
-                            fontSize = 12.sp,
-                            color = Color(0xE6B1C7F3),
-                            fontWeight = FontWeight.Bold,
+                        style = Theme.textStyle.contentOne.copy(
+                            color = Theme.colors.blueBackground,
                             textDirection = TextDirection.Rtl
                         ),
                         modifier = Modifier.align(Alignment.End)
@@ -119,8 +116,7 @@ fun LoginScreen(
         ) {
             Text(
                 text = "تسجيل الدخول",
-                style = TextStyle(
-                    fontSize = 24.sp,
+                style = Theme.textStyle.header.copy(
                     color = Theme.colors.bluePrimary,
                     fontWeight = FontWeight.SemiBold,
                     textDirection = TextDirection.Rtl
@@ -131,11 +127,8 @@ fun LoginScreen(
             )
             Text(
                 text = "أدخل بيانات الاعتماد الخاصة بك للوصول إلى المحفظة.",
-                style = TextStyle(
-                    fontFamily = ibm,
-                    fontSize = 14.sp,
+                style = Theme.textStyle.title.sub.copy(
                     color = Color(0xFF44474E),
-                    fontWeight = FontWeight.Normal,
                     textDirection = TextDirection.Rtl
                 ),
                 modifier = Modifier
@@ -162,9 +155,7 @@ fun LoginScreen(
             ) {
                 Text(
                     text = "نسيت كلمة المرور؟",
-                    style = TextStyle(
-                        fontFamily = ibm,
-                        fontSize = 12.sp,
+                    style = Theme.textStyle.contentOne.copy(
                         color = Theme.colors.bluePrimary,
                         fontWeight = FontWeight.Medium,
                         textDirection = TextDirection.Rtl
@@ -178,9 +169,7 @@ fun LoginScreen(
                 Row {
                     Text(
                         text = "تذكر بياناتي",
-                        style = TextStyle(
-                            fontFamily = ibm,
-                            fontSize = 12.sp,
+                        style = Theme.textStyle.contentOne.copy(
                             color = Color(0xFF44474E),
                             fontWeight = FontWeight.Medium,
                             textDirection = TextDirection.Rtl
@@ -219,9 +208,7 @@ fun LoginScreen(
                 )
                 Text(
                     text = "أو الدخول السريع عبر",
-                    style = TextStyle(
-                        fontFamily = ibm,
-                        fontSize = 12.sp,
+                    style = Theme.textStyle.contentOne.copy(
                         color = Theme.colors.graySubTitles,
                         fontWeight = FontWeight.Medium,
                         textDirection = TextDirection.Rtl
