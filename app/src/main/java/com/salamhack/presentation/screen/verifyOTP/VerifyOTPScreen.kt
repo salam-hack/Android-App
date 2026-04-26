@@ -15,6 +15,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,6 +42,9 @@ import com.salamhack.presentation.shared.designSystem.theme.Theme
 fun VerifyOTPScreen(
     modifier: Modifier = Modifier
 ){
+
+    var verifyOTPText by remember { mutableStateOf("") }
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -129,8 +136,12 @@ fun VerifyOTPScreen(
             )
 
             OTPInputTextField(
-                otpText = "1",
-                onOtpTextChange = {},
+                otpText = verifyOTPText,
+                onOtpTextChange = {
+                    if (it.length <= 6) {
+                        verifyOTPText = it
+                    }
+                },
                 modifier = Modifier
                     .padding(top = 48.dp)
                     .fillMaxWidth()
