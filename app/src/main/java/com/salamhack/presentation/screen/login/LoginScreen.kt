@@ -143,6 +143,7 @@ fun LoginScreen(
             AppPasswordTextField(
                 title = "كلمة المرور",
                 placeholder = "A123456a",
+                showRequirements = false,
                 modifier = Modifier.padding(top = 24.dp)
             )
 
