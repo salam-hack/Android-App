@@ -2,6 +2,7 @@ package com.salamhack.presentation.screen.verifyOTP
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
 import com.salamhack.presentation.shared.components.AppButton
 import com.salamhack.presentation.shared.components.AppButtonType
@@ -37,9 +39,23 @@ import com.salamhack.presentation.shared.components.IconHolder
 import com.salamhack.presentation.shared.components.OTPInputTextField
 import com.salamhack.presentation.shared.designSystem.textStyle.ibm
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun VerifyOTPScreen(
+    viewModel: VerifyOTPViewModel = koinViewModel()
+){
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
+    VerifyOTPScreenContent(
+        action = viewModel,
+        state = state
+    )
+}
+
+@Composable
+fun VerifyOTPScreenContent(
+    action: VerifyOTPInteractionListener,
+    state: VerifyOTPUiState,
     modifier: Modifier = Modifier
 ){
 
@@ -164,6 +180,9 @@ fun VerifyOTPScreen(
                     ),
                     modifier = Modifier
                         .padding(end = 4.dp)
+                        .clickable{
+                            //action.onClickResendCode()
+                        }
                 )
                 Text(
                     text = "لم تستلم الرمز؟",
@@ -185,7 +204,11 @@ fun VerifyOTPScreen(
             AppButton(
                 text = "تحقق",
                 type = AppButtonType.Primary,
-                modifier = Modifier.padding(top = 24.dp)
+                modifier = Modifier
+                    .padding(top = 24.dp)
+                    .clickable{
+                        action.onClickVerify()
+                    }
             )
 
             // Login

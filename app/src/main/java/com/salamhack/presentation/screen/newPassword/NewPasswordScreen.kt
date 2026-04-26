@@ -2,6 +2,7 @@ package com.salamhack.presentation.screen.newPassword
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,6 +27,7 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
 import com.salamhack.presentation.shared.components.AppButton
 import com.salamhack.presentation.shared.components.AppButtonType
@@ -32,9 +35,24 @@ import com.salamhack.presentation.shared.components.AppPasswordTextField
 import com.salamhack.presentation.shared.components.IconHolder
 import com.salamhack.presentation.shared.designSystem.textStyle.ibm
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun NewPasswordScreen(
+    viewModel: NewPasswordViewModel = koinViewModel()
+){
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
+    NewPasswordScreenContent(
+        action = viewModel,
+        state = state
+    )
+}
+
+
+@Composable
+fun NewPasswordScreenContent(
+    action: NewPasswordInteractionListener,
+    state: NewPasswordUiState,
     modifier: Modifier = Modifier
 ){
     Box(
@@ -143,7 +161,10 @@ fun NewPasswordScreen(
             AppButton(
                 text = "حفظ كلمة المرور",
                 type = AppButtonType.Primary,
-                modifier = Modifier.padding(top = 24.dp)
+                modifier = Modifier.padding(top = 24.dp),
+                onClick = {
+                    action.onClickSavePassword()
+                }
             )
 
 
@@ -162,6 +183,9 @@ fun NewPasswordScreen(
                     ),
                     modifier = Modifier
                         .padding(end = 4.dp)
+                        .clickable{
+                            action.onClickLogin()
+                        }
                 )
                 Text(
                     text = "تذكرت كلمة المرور؟",
