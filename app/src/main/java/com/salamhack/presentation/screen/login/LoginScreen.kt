@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
 import com.salamhack.presentation.shared.components.AppButton
 import com.salamhack.presentation.shared.components.AppButtonType
@@ -40,12 +41,25 @@ import com.salamhack.presentation.shared.components.AppPhoneTextField
 import com.salamhack.presentation.shared.components.IconHolder
 import com.salamhack.presentation.shared.designSystem.textStyle.ibm
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier
+    viewModel: LoginViewModel = koinViewModel()
 ){
-    
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
+    LoginScreenContent(
+        action = viewModel,
+        state = state
+    )
+}
+
+@Composable
+fun LoginScreenContent(
+    action: LoginInteractionListener,
+    state: LoginUiState,
+    modifier: Modifier = Modifier,
+){
     var rememberMe by remember { mutableStateOf(false) }
     
     Box(
@@ -163,7 +177,7 @@ fun LoginScreen(
                     ),
                     modifier = Modifier
                         .clickable{
-                            TODO()
+                            action.onClickForgotPassword()
                         }
                 )
 
@@ -191,7 +205,10 @@ fun LoginScreen(
             AppButton(
                 text = "تسجيل دخول",
                 type = AppButtonType.Primary,
-                modifier = Modifier.padding(top = 24.dp)
+                modifier = Modifier.padding(top = 24.dp),
+                onClick = {
+                    action.onClickLogin()
+                }
             )
 
             // Divider
@@ -257,6 +274,9 @@ fun LoginScreen(
                     ),
                     modifier = Modifier
                         .padding(end = 4.dp)
+                        .clickable{
+                            action.onClickSignUp()
+                        }
                 )
                 Text(
                     text = "ليس لديك حساب؟ ",
