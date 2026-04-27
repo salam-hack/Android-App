@@ -1,6 +1,6 @@
 package com.salamhack.di
 
-import com.salamhack.data.remote.api.ApiService
+import com.salamhack.data.remote.home.api.HomeApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -31,7 +31,7 @@ val networkModule = module {
             .build()
     }
 
-    single<ApiService> {
-        get<Retrofit>().create(ApiService::class.java)
+    single<HomeApiService> {
+        get<Retrofit>().create(HomeApiService::class.java)
     }
 }
