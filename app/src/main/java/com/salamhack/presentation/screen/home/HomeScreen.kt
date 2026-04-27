@@ -15,10 +15,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,17 +29,34 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
 import com.salamhack.presentation.shared.components.SmartAnalysisCard
 import com.salamhack.presentation.shared.components.TargetCard
 import com.salamhack.presentation.shared.components.TotalWealth
 import com.salamhack.presentation.shared.components.TransactionItem
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(
+    viewModel: HomeViewModel = koinViewModel()
+){
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
+    HomeScreenContent(
+        action = viewModel,
+        state = state
+    )
+}
+
+@Composable
+fun HomeScreenContent(
+    modifier: Modifier = Modifier,
+    action: HomeInteractionListener,
+    state: HomeUiState
+){
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(Color(0xFFF6F7FD))
             .statusBarsPadding()
@@ -95,7 +114,7 @@ fun HomeScreen(){
                             )
                         )
                         Text(
-                            text = "أمير يسري",
+                            text = state.data?.user?.name ?: "أمير يسري",
                             style = Theme.textStyle.header.copy(
                                 color = Theme.colors.white,
                             )
@@ -140,12 +159,12 @@ fun HomeScreen(){
                 item {
                     TotalWealth(
                         title = "إجمالي الرصيد الحالي",
-                        amountText = "15,400",
+                        amountText = state.data?.balance?.currentBalance.toString(), // "15,400"
                         currencyText = "ج.م",
                         incomeLabel = "الدخل هذا الشهر",
-                        incomeAmountText = "20,000",
+                        incomeAmountText = state.data?.balance?.incomeThisMonth.toString(), // "20,000"
                         expenseLabel = "المصروفات",
-                        expenseAmountText = "4,600",
+                        expenseAmountText = state.data?.balance?.expensesThisMonth.toString(), // "4,600"
                         incomeIcon = R.drawable.ic_income,
                         expenseIcon = R.drawable.ic_expense,
                         modifier = Modifier.padding(top = 40.dp)
@@ -153,17 +172,19 @@ fun HomeScreen(){
                 }
 
                 item {
+                    val goal = state.data?.goals?.first()
                     TargetCard(
-                        title = "شراء MacBook Pro",
-                        targetAmount = "80,000",
-                        saverAmount = "20,000",
-                        percentage = 25f,
+                        title = goal?.title ?: "شراء MacBook Pro", // "شراء MacBook Pro"
+                        targetAmount = goal?.targetAmount.toString(), // "80,000"
+                        saverAmount = goal?.savedAmount.toString(), // "20,000"
+                        percentage = goal?.progress ?: 0f,
                         icon = R.drawable.ic_laptop,
-                        remainingMonths = "10"
+                        remainingMonths = goal?.message ?: "10"
                     )
                 }
 
                 item {
+                    val smartAnalysis = state.data?.smartAnalysis?.first()
                     SmartAnalysisCard(
                         amount = 500,
                         trackedItemTitle = "Mackbook",
@@ -172,40 +193,24 @@ fun HomeScreen(){
                 }
 
                 item {
+                    val transactions = state.data?.transactions ?: emptyList()
+
                     TransactionBoxHolder {
                         Column(
                             verticalArrangement = Arrangement.spacedBy(20.dp)
                         ) {
-                            TransactionItem(
-                                amount = "150",
-                                date = "25 أكتوبر",
-                                time = "09:00 ص",
-                                title = "الراتب الشهري",
-                                category = "دخل",
-                                icon = R.drawable.ic_work,
-                                isIncome = true,
-                                color = Color(0xFF00A63E)
-                            )
-                            TransactionItem(
-                                amount = "150",
-                                date = "25 أكتوبر",
-                                time = "09:00 ص",
-                                title = "الراتب الشهري",
-                                category = "دخل",
-                                icon = R.drawable.ic_work,
-                                isIncome = true,
-                                color = Color(0xFF00A63E)
-                            )
-                            TransactionItem(
-                                amount = "150",
-                                date = "25 أكتوبر",
-                                time = "09:00 ص",
-                                title = "الراتب الشهري",
-                                category = "دخل",
-                                icon = R.drawable.ic_work,
-                                isIncome = true,
-                                color = Color(0xFF00A63E)
-                            )
+                            transactions.forEach { transaction ->
+                                TransactionItem(
+                                    amount = transaction.amount.toString(),
+                                    date = transaction.date,
+                                    time = transaction.date,
+                                    title = transaction.title,
+                                    category = transaction.title,
+                                    icon = R.drawable.ic_work,
+                                    isIncome = transaction.isIncome,
+                                    color = Theme.colors.bluePrimary
+                                )
+                            }
                         }
                     }
                 }
