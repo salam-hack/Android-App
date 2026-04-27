@@ -16,9 +16,9 @@ import com.salamhack.presentation.shared.designSystem.theme.AppTheme
 @Composable
 fun AppContent() {
 
-//    val navController = rememberNavController()
-//    val navBackStackEntry by navController.currentBackStackEntryAsState()
-//    val currentRoute = navBackStackEntry?.destination?.route
+    val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
 //
 //    val mainRoutes = setOf(
 //        Destinations.Home::class.qualifiedName,
@@ -44,9 +44,9 @@ fun AppContent() {
             Box(
                 modifier = Modifier.padding(innerPadding)
             ){
-//                AppNavGraph(
-//                    navController = navController,
-//                )
+                AppNavGraph(
+                    navController = navController,
+                )
             }
         }
     }

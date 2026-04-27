@@ -6,39 +6,39 @@ import androidx.compose.ui.unit.sp
 
 val defaultTextStyle = AppTextStyle(
     header = TextStyle(
-//        fontFamily = ibm,
+        fontFamily = ibm,
         fontSize = 24.sp,
         fontWeight = FontWeight.Bold,
     ),
     title = SizedTitleTextStyle(
         bold = TextStyle(
-//            fontFamily = ibm,
+            fontFamily = ibm,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
         ),
         medium = TextStyle(
-//            fontFamily = ibm,
+            fontFamily = ibm,
             fontSize = 16.sp,
             fontWeight = FontWeight.Medium,
         ),
         regular = TextStyle(
-//            fontFamily = ibm,
+            fontFamily = ibm,
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
         ),
         sub = TextStyle(
-//            fontFamily = ibm,
+            fontFamily = ibm,
             fontSize = 14.sp,
             fontWeight = FontWeight.Normal,
         ),
     ),
     contentOne = TextStyle(
-//        fontFamily = ibm,
+        fontFamily = ibm,
         fontSize = 12.sp,
         fontWeight = FontWeight.Normal,
     ),
     contentTwo = TextStyle(
-//        fontFamily = ibm,
+        fontFamily = ibm,
         fontSize = 10.sp,
         fontWeight = FontWeight.Normal,
     )
