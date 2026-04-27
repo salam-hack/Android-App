@@ -1,5 +1,6 @@
 package com.salamhack.presentation.shared.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -18,21 +19,40 @@ import androidx.compose.ui.unit.dp
 fun IconHolder(
     icon: Int,
     color: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    hasBorder: Boolean = true
 ){
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(14.dp))
-            .background(color.copy(alpha = 0.1f))
-            .border(1.dp, color.copy(alpha = 0.2f), RoundedCornerShape(14.dp))
-            .size(64.dp)
-    ){
-        Icon(
-            painter = painterResource(id = icon),
-            contentDescription = null,
-            tint = color,
-            modifier = Modifier
-                .align(Alignment.Center)
-        )
+    if (hasBorder){
+        Box(
+            modifier = modifier
+                .clip(RoundedCornerShape(14.dp))
+                .background(color.copy(alpha = 0.1f))
+                .border(1.dp, color.copy(alpha = 0.2f), RoundedCornerShape(14.dp))
+                .size(64.dp)
+        ){
+            Icon(
+                painter = painterResource(id = icon),
+                contentDescription = null,
+                tint = color,
+                modifier = Modifier
+                    .align(Alignment.Center)
+            )
+        }
+    }else {
+        Box(
+            modifier = modifier
+                .size(48.dp)
+                .background(color.copy(alpha = 0.1f), shape = RoundedCornerShape(16.dp))
+        ){
+            Icon(
+                painter = painterResource(id = icon),
+                contentDescription = null,
+                tint = color,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .size(24.dp)
+            )
+        }
     }
+
 }

@@ -2,6 +2,7 @@ package com.salamhack.di
 
 
 import com.salamhack.presentation.screen.createAccount.CreateAccountViewModel
+import com.salamhack.presentation.screen.home.HomeViewModel
 import com.salamhack.presentation.screen.login.LoginViewModel
 import com.salamhack.presentation.screen.newPassword.NewPasswordViewModel
 import com.salamhack.presentation.screen.resetPassword.ResetPasswordViewModel
@@ -16,4 +17,5 @@ val viewModelModule = module {
     viewModel { NewPasswordViewModel() }
     viewModel { ResetPasswordViewModel() }
     viewModel { VerifyOTPViewModel() }
+    viewModel { HomeViewModel(get()) }
 }
