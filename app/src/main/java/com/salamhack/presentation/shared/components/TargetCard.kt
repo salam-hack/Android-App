@@ -80,7 +80,11 @@ fun TargetCard(
                         )
                     )
                 }
-                IconHolder(icon = icon)
+                IconHolder(
+                    icon = icon,
+                    color = Theme.colors.bluePrimary,
+                    hasBorder = false
+                )
             }
 
             AppProgressBar(
@@ -207,27 +211,6 @@ fun PercentageHolder(
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(horizontal = 12.dp, vertical = 4.dp)
-        )
-    }
-}
-
-@Composable
-fun IconHolder(
-    modifier: Modifier = Modifier,
-    @DrawableRes icon: Int
-){
-    Box(
-        modifier = modifier
-            .size(48.dp)
-            .background(Theme.colors.blueBackground, shape = RoundedCornerShape(16.dp))
-    ){
-        Icon(
-            painter = painterResource(id = icon),
-            contentDescription = null,
-            tint = Theme.colors.bluePrimary,
-            modifier = Modifier
-                .align(Alignment.Center)
-                .size(24.dp)
         )
     }
 }
