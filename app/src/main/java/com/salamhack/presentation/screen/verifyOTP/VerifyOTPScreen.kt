@@ -203,7 +203,7 @@ fun VerifyOTPScreenContent(
             // Save Button
             AppButton(
                 text = "تحقق",
-                type = AppButtonType.Primary,
+                type = AppButtonType.Secondary,
                 modifier = Modifier
                     .padding(top = 24.dp)
                     .clickable{

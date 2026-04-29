@@ -1,6 +1,6 @@
-package com.salamhack.data.remote.home.api
+package com.salamhack.data.source.remote.home.api
 
-import com.salamhack.data.remote.home.dto.HomeResponseDto
+import com.salamhack.data.source.remote.home.dto.HomeResponseDto
 import retrofit2.http.GET
 
 interface HomeApiService {

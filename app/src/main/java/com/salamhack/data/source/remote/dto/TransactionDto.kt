@@ -1,4 +1,4 @@
-package com.salamhack.data.remote.dto
+package com.salamhack.data.source.remote.dto
 
 data class TransactionDto(
     val id: String,
@@ -6,6 +6,7 @@ data class TransactionDto(
     val amount: Double,
     val type: String,
     val category: String,
+    val categoryId: String,
     val date: String,
     val icon: String
 )

@@ -1,7 +1,7 @@
-package com.salamhack.data.remote.home
+package com.salamhack.data.source.remote.home
 
-import com.salamhack.data.remote.home.api.HomeApiService
-import com.salamhack.data.remote.home.dto.HomeResponseDto
+import com.salamhack.data.source.remote.home.api.HomeApiService
+import com.salamhack.data.source.remote.home.dto.HomeResponseDto
 
 interface HomeRemoteDataSource {
     suspend fun getHome(): HomeResponseDto

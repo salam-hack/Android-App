@@ -1,10 +1,12 @@
 package com.salamhack.presentation.shared.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -23,6 +25,7 @@ import com.salamhack.presentation.shared.designSystem.theme.Theme
 
 sealed class AppButtonType {
     data object Primary : AppButtonType()
+    data object Secondary : AppButtonType()
     data object Danger : AppButtonType()
     data object Ghost : AppButtonType()
 }
@@ -33,51 +36,65 @@ fun AppButton(
     type: AppButtonType = AppButtonType.Primary,
     icon: Int? = null,
     onClick: () -> Unit = {},
+    isLoading: Boolean = false
 ){
 
     val backgroundColor = when (type) {
         AppButtonType.Primary -> Theme.colors.bluePrimary
+        AppButtonType.Secondary -> Color.Transparent
         AppButtonType.Danger -> Theme.colors.redWarning
         AppButtonType.Ghost -> Color(0xFFE1E3E4)
     }
 
     val textColor = when (type) {
         is AppButtonType.Primary -> Theme.colors.white
+        is AppButtonType.Secondary -> Theme.colors.grayNonActive
         is AppButtonType.Danger -> Theme.colors.white
         is AppButtonType.Ghost -> Theme.colors.dark
     }
 
     val modifierFinal = modifier
-        .clip(RoundedCornerShape(12.dp))
+        .clip(RoundedCornerShape(16.dp))
         .background(backgroundColor)
         .fillMaxWidth()
         .clickable { onClick() }
 
     Box(
         modifier = modifierFinal
+            .then(if (type == AppButtonType.Secondary)
+                Modifier.border(2.dp, Color(0xFFE2E8F0), RoundedCornerShape(16.dp)) else Modifier)
     ){
-        Row(
-            modifier = Modifier
-                .padding(horizontal = 24.dp, vertical = 14.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            if (icon != null){
-                Icon(
-                    painter = painterResource(icon),
-                    contentDescription = "analyze",
-                    tint = textColor,
-                    modifier = Modifier.padding(end = 8.dp)
-                )
-            }
-            Text(
-                text = text,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
-                fontFamily = ibm,
+        if (isLoading) {
+            CircularProgressIndicator(
                 color = textColor,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(8.dp)
             )
+        } else {
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 24.dp, vertical = 14.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Text(
+                    text = text,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                    fontFamily = ibm,
+                    color = textColor,
+                )
+                if (icon != null){
+                    Icon(
+                        painter = painterResource(icon),
+                        contentDescription = "analyze",
+                        tint = textColor,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                }
+            }
         }
     }
 }
@@ -91,7 +108,12 @@ private fun Preview(){
         AppButton(
             text = "تحليل لأن",
             type = AppButtonType.Primary,
-            icon = R.drawable.ic_security
+            icon = R.drawable.ic_security,
+            isLoading = true
+        )
+        AppButton(
+            text = "حذف الرسالة",
+            type = AppButtonType.Secondary
         )
         AppButton(
             text = "حذف الرسالة",

@@ -29,8 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
-import com.salamhack.presentation.screen.login.LoginInteractionListener
-import com.salamhack.presentation.screen.login.LoginUiState
 import com.salamhack.presentation.shared.components.AppButton
 import com.salamhack.presentation.shared.components.AppButtonType
 import com.salamhack.presentation.shared.components.AppPhoneTextField
@@ -163,7 +161,7 @@ fun ResetPasswordScreenContent(
             // Save Button
             AppButton(
                 text = "ارسال الكود",
-                type = AppButtonType.Primary,
+                type = AppButtonType.Secondary,
                 modifier = Modifier
                     .padding(top = 24.dp)
                     .clickable{
