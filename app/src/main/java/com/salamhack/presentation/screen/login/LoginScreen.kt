@@ -204,7 +204,7 @@ fun LoginScreenContent(
             // Login Button
             AppButton(
                 text = "تسجيل دخول",
-                type = AppButtonType.Secondary,
+                type = AppButtonType.Primary,
                 modifier = Modifier.padding(top = 24.dp),
                 onClick = {
                     action.onClickLogin()

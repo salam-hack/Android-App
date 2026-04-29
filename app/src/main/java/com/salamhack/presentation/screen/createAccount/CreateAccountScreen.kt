@@ -170,7 +170,7 @@ fun CreateAccountScreenContent(
             // Login Button
             AppButton(
                 text = "انشاء حساب",
-                type = AppButtonType.Secondary,
+                type = AppButtonType.Primary,
                 modifier = Modifier.padding(top = 24.dp),
                 onClick = {
                     action.onClickCreate()

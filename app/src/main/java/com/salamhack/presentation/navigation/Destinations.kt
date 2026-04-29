@@ -64,7 +64,7 @@ sealed interface Destinations : Graph {
 }
 
 fun NavGraphBuilder.buildAppNavGraph() {
-    navigation<Destinations.AppGraph>(startDestination = Destinations.AddTransaction) {
+    navigation<Destinations.AppGraph>(startDestination = Destinations.Login) {
         composable<Destinations.Home> { HomeScreen() }
         composable<Destinations.Login> { LoginScreen() }
         composable<Destinations.CreateAccount> { CreateAccountScreen() }
