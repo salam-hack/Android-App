@@ -1,12 +1,12 @@
 package com.salamhack.domain.entity
 
-data class Transaction(
-    val id: String,
+data class ParsedTransaction(
     val title: String,
     val amount: Double,
     val isIncome: Boolean,
-    val category: String,
     val categoryId: String,
     val date: String,
-    val icon: String
+    val time: String,
+    val transactionDate: String,
+    val confidence: Double
 )

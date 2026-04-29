@@ -160,7 +160,7 @@ fun NewPasswordScreenContent(
             // Save Button
             AppButton(
                 text = "حفظ كلمة المرور",
-                type = AppButtonType.Primary,
+                type = AppButtonType.Secondary,
                 modifier = Modifier.padding(top = 24.dp),
                 onClick = {
                     action.onClickSavePassword()
