@@ -72,9 +72,9 @@ fun NavGraphBuilder.buildAppNavGraph() {
         composable<Destinations.ResetPassword> { ResetPasswordScreen() }
         composable<Destinations.VerifyOTP> { VerifyOTPScreen() }
         composable<Destinations.AddTransaction> { AddTransactionScreen() }
-        composable<Destinations.AddTransaction> { GoalsScreen() }
-        composable<Destinations.AddTransaction> { MoreScreen() }
-        composable<Destinations.AddTransaction> { ObligationsScreen() }
-        composable<Destinations.AddTransaction> { ChatBotScreen() }
+        composable<Destinations.Goals> { GoalsScreen() }
+        composable<Destinations.More> { MoreScreen() }
+        composable<Destinations.Obligations> { ObligationsScreen() }
+        composable<Destinations.ChatBot> { ChatBotScreen() }
     }
 }

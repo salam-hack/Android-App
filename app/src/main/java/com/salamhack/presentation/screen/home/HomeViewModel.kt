@@ -20,13 +20,13 @@ class HomeViewModel(
                         isLoading = true,
                     )
                 )
-                getHomeUseCase()
+//                getHomeUseCase()
             },
             onSuccess = {
                 updateState(
                     newState = screenState.value.copy(
                         isLoading = false,
-                        data = it
+//                        data = it
                     )
                 )
             },
