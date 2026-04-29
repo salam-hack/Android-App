@@ -77,7 +77,7 @@ fun NavBar(
 
     Box(
         modifier = modifier
-            .padding(top = 12.dp)
+            .padding(horizontal = 18.dp)
     ){
         Box(
             modifier = Modifier
@@ -212,7 +212,7 @@ fun NavBar(
                 .then(glow)
                 .clickable {
                     coroutineScope.launch {
-//                        navigator.navigate(Destinations.ChatBot)
+                        navigator.navigate(Destinations.ChatBot)
                     }
                 }
         ){
@@ -289,7 +289,7 @@ data class NavItemData(
     val destination: Destination
 )
 
-@Preview(showBackground = false)
+@Preview
 @Composable
 private fun Preview(){
     NavBar(
