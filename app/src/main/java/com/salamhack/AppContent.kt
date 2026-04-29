@@ -27,7 +27,8 @@ fun AppContent() {
         Destinations.Home::class.qualifiedName,
         Destinations.Goals::class.qualifiedName,
         Destinations.More::class.qualifiedName,
-        Destinations.Obligations::class.qualifiedName
+        Destinations.Obligations::class.qualifiedName,
+        Destinations.ChatBotHistory::class.qualifiedName
     )
 
     AppTheme {
