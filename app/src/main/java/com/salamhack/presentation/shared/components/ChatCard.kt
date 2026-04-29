@@ -34,7 +34,7 @@ import com.salamhack.presentation.shared.designSystem.theme.Theme
 
 @Composable
 fun ChatCard(
-    icon: Painter,
+    icon: Int,
     title: String,
     description: String,
     color: Color,
@@ -106,7 +106,7 @@ fun ChatCard(
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                painter = icon,
+                painter = painterResource(icon),
                 contentDescription = title,
                 tint = color,
                 modifier = Modifier.size(28.dp)
@@ -119,7 +119,7 @@ fun ChatCard(
 @Composable
 private fun Preview(){
     ChatCard(
-        icon = painterResource(id = R.drawable.ic_bot),
+        icon = R.drawable.ic_bot,
         title = "تحليل المصروفات الأسبوعية",
         description = " ج.م على المطاعم هذا الأسبوع وهو أعلى",
         color = Color(0xFFE17100),
