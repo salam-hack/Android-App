@@ -40,30 +40,26 @@ import com.salamhack.presentation.shared.designSystem.theme.Theme
 
 @Composable
 fun TransactionNoteTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     placeholder: String = "ملاحظات (اختياري)..."
 ) {
-    // State to hold the text field value
-    var textValue by remember { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
 
-
-    // Colors sampled from the image
     val textColor = Color(0xFF314158)
     val inputTextColor = Theme.colors.bluePrimary
     val borderColor = Color(0xFFF1F5F9)
     val backgroundColor = if (isFocused) Color(0xFFF8FAFC) else Theme.colors.white
     val iconColor = Color(0xFF90A1B9)
 
-    // Enforce RTL layout direction for Arabic
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
         Column(
-            modifier = modifier
-                .fillMaxWidth()
+            modifier = modifier.fillMaxWidth()
         ) {
             // Label
             Text(
-                text = "ملاحظات (اختياري)",
+                text = "عنوان المعاملة",
                 style = Theme.textStyle.title.sub.copy(
                     color = textColor,
                 ),
@@ -102,8 +98,8 @@ fun TransactionNoteTextField(
 
                 // Text Input
                 BasicTextField(
-                    value = textValue,
-                    onValueChange = { textValue = it },
+                    value = value,
+                    onValueChange = onValueChange,
                     textStyle = TextStyle(
                         color = inputTextColor,
                         fontSize = 16.sp,
@@ -111,24 +107,20 @@ fun TransactionNoteTextField(
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                     decorationBox = { innerTextField ->
-
-                        if (textValue.isEmpty()) {
-                            Text(
-                                text = placeholder,
-                                style = TextStyle(
-                                    fontFamily = ibm,
-                                    fontWeight = FontWeight.Normal,
-                                    fontSize = 16.sp,
-                                    color = Color(0xFF90A1B9),
-                                    lineHeight = 20.sp,
-                                    textDirection = TextDirection.Rtl
-                                ),
-                                modifier = Modifier
-                            )
-                        }
-                        Box(
-                            contentAlignment = Alignment.CenterStart
-                        ) {
+                        Box(contentAlignment = Alignment.CenterStart) {
+                            if (value.isEmpty()) {
+                                Text(
+                                    text = placeholder,
+                                    style = TextStyle(
+                                        fontFamily = ibm,
+                                        fontWeight = FontWeight.Normal,
+                                        fontSize = 16.sp,
+                                        color = Color(0xFF90A1B9),
+                                        lineHeight = 20.sp,
+                                        textDirection = TextDirection.Rtl
+                                    )
+                                )
+                            }
                             innerTextField()
                         }
                     }
@@ -138,10 +130,14 @@ fun TransactionNoteTextField(
     }
 }
 
-
-
 @Preview(showBackground = true)
 @Composable
-private fun Preview() {
-    TransactionNoteTextField()
+private fun PreviewTransactionNoteTextField() {
+    // محاكاة الحالة للـ Preview
+    var note by remember { mutableStateOf("") }
+
+    TransactionNoteTextField(
+        value = note,
+        onValueChange = { note = it }
+    )
 }
