@@ -1,6 +1,6 @@
 package com.salamhack.di
 
-import com.salamhack.domain.repository.TransactionRepository
+import com.salamhack.domain.usecase.AddTransactionUseCase
 import com.salamhack.domain.usecase.CreateConversationUseCase
 import com.salamhack.domain.usecase.GetHomeUseCase
 import com.salamhack.domain.usecase.ParseTransactionUseCase
@@ -13,4 +13,5 @@ val useCaseModule = module {
     factory { ParseTransactionUseCase(get()) }
     factory { SendMessageUseCase(get()) }
     factory { CreateConversationUseCase(get()) }
+    factory { AddTransactionUseCase(get()) }
 }
