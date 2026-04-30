@@ -1,5 +1,7 @@
 package com.salamhack.domain.entity
 
-data class SmartAnalysis(
-    val message: String
+data class SmartAnalysisEntity(
+    val title: String,
+    val description: String,
+    val type: String
 )

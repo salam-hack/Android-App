@@ -345,7 +345,7 @@ fun AddTransactionScreenContent(
                     isIncome = state.parsedTransaction?.isIncome == true,
                     amount = state.parsedTransaction?.amount.toString(),
                     categoryIcon = getCategoryIcon(state.parsedTransaction?.categoryId ?: ""),
-                    category = getCategoryName(state.transactionResult?.category ?: ""),
+                    category = "", // getCategoryName(state.transactionResult?.category.toString())
                     date = state.parsedTransaction?.date ?: "",
                     note = "مطعم كشري"
                 )

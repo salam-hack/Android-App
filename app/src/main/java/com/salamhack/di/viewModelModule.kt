@@ -2,6 +2,7 @@ package com.salamhack.di
 
 
 import com.salamhack.presentation.screen.addTransaction.AddTransactionViewModel
+import com.salamhack.presentation.screen.chatBot.ChatBotViewModel
 import com.salamhack.presentation.screen.createAccount.CreateAccountViewModel
 import com.salamhack.presentation.screen.home.HomeViewModel
 import com.salamhack.presentation.screen.login.LoginViewModel
@@ -20,4 +21,5 @@ val viewModelModule = module {
     viewModel { VerifyOTPViewModel() }
     viewModel { HomeViewModel(get()) }
     viewModel { AddTransactionViewModel(get()) }
+    viewModel { ChatBotViewModel() }
 }

@@ -1,9 +1,9 @@
 package com.salamhack.presentation.screen.addTransaction
 
+import android.view.SurfaceControl
 import com.salamhack.domain.entity.Category
 import com.salamhack.domain.entity.InputType
 import com.salamhack.domain.entity.ParsedTransaction
-import com.salamhack.domain.entity.Transaction
 import com.salamhack.domain.entity.TransactionType
 
 data class AddTransactionUiState(
@@ -16,7 +16,7 @@ data class AddTransactionUiState(
     val categories: List<Category> = emptyList(),
     val selectedCategory: Category? = null,
 
-    val transactionResult: Transaction? = null,
+    val transactionResult: SurfaceControl.Transaction? = null,
 
     val smartInputText: String = "",
     val parsedTransaction: ParsedTransaction? = null,

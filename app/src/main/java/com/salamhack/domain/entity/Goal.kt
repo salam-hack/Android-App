@@ -1,8 +1,9 @@
 package com.salamhack.domain.entity
 
-data class Goal(
+data class GoalEntity(
     val title: String,
-    val progress: Float,
+    val isActive: Boolean,
+    val progress: Double,
     val savedAmount: Double,
     val targetAmount: Double,
     val message: String
