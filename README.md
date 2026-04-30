@@ -33,12 +33,11 @@ You can explore the full UI prototype of Modabber on Figma using the link below:
 [🔗 Open Modabber on Figma](PUT_YOUR_FIGMA_LINK_HERE)
 
 The prototype includes:
-- Light & Dark Mode
 - Full navigation flow
 - Expense tracking screens
 - AI Assistant screens
 - Analytics dashboard
-- Arabic & English UI support
+- Arabic UI support
 
 ---
 
@@ -76,8 +75,6 @@ Users can also:
 - ⚠️ Overspending alerts
 - 💳 Subscription & debt management
 - 🎯 Savings goals system
-- 🌙 Dark Mode support
-- 🌐 Arabic & English support
 - ⚡ Fast and simple user experience
 
 ---
@@ -93,7 +90,7 @@ Users can also:
 | Dependency Injection | Koin |
 | Local Storage | Room Database |
 | Backend Integration | REST API |
-| AI Integration | AI-powered financial assistant |
+| AI Integration | AI-powered financial assistant/parser |
 | Testing | JUnit5 / Coroutine Testing / Mocking |
 
 ---
@@ -140,7 +137,7 @@ Whether you’re a developer, designer, or someone with creative ideas — feel 
 
 # 👨‍💻 Developed by
 
-- **[YOUR_TEAM_NAME]**
+- **[Half-Half]**
 
 ---
 
