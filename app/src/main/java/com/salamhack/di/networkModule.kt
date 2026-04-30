@@ -1,5 +1,6 @@
 package com.salamhack.di
 
+import com.salamhack.data.source.remote.chatBot.api.ChatApiService
 import com.salamhack.data.source.remote.home.api.HomeApiService
 import com.salamhack.data.source.remote.transaction.api.TransactionApiService
 import okhttp3.OkHttpClient
@@ -35,7 +36,12 @@ val networkModule = module {
     single<HomeApiService> {
         get<Retrofit>().create(HomeApiService::class.java)
     }
+
     single<TransactionApiService> {
         get<Retrofit>().create(TransactionApiService::class.java)
+    }
+
+    single<ChatApiService> {
+        get<Retrofit>().create(ChatApiService::class.java)
     }
 }
