@@ -60,16 +60,3 @@ fun TransactionDto.toDomain() = TransactionEntity(
     categoryId = categoryId.orEmpty(),
     date = date.orEmpty()
 )
-
-fun ParsedTransactionDto.toEntity(): ParsedTransaction {
-    return ParsedTransaction(
-        title = title,
-        amount = amount,
-        isIncome = type == "income",
-        categoryId = categoryId,
-        date = date,
-        time = time,
-        transactionDate = transactionDate,
-        confidence = confidence
-    )
-}

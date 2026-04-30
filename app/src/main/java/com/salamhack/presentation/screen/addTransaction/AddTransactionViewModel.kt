@@ -68,20 +68,51 @@ AddTransactionInteractionListener {
     }
 
     override fun onClickSmartAnalysis(text: String) {
-        updateState(screenState.value.copy(isLoading = true))
-        tryToExecute(
-            onSuccess = { result ->
+        if (text.isBlank()) {
+            updateState(screenState.value.copy(error = "يرجى إدخال نص للتحليل"))
+            return
+        }
+
+        tryToObserve(
+            observe = {
+                parseTransactionUseCase(userId = userId, message = text)
+            },
+            onStart = {
                 updateState(
-                    newState = screenState.value.copy(
-                        isLoading = false,
-                        parsedTransaction = result,
-                        bottomSheet = screenState.value.bottomSheet.copy(isVisible = true)
+                    screenState.value.copy(
+                        isLoading = true,
+                        error = null
                     )
                 )
             },
-            execute = { parseTransactionUseCase(text) },
-            onError = { error ->
-                updateState(screenState.value.copy(error = error.message, isLoading = false))
+            onEach = { result ->
+                result?.fold(
+                    onSuccess = { parsedData ->
+                        updateState(
+                            screenState.value.copy(
+                                isLoading = false,
+                                parsedTransaction = parsedData,
+                                bottomSheet = screenState.value.bottomSheet.copy(isVisible = true)
+                            )
+                        )
+                    },
+                    onFailure = { error ->
+                        updateState(
+                            screenState.value.copy(
+                                isLoading = false,
+                                error = error.message ?: "فشل في تحليل النص"
+                            )
+                        )
+                    }
+                )
+            },
+            onError = { exception ->
+                updateState(
+                    screenState.value.copy(
+                        isLoading = false,
+                        error = exception.message ?: "حدث خطأ غير متوقع بالشبكة"
+                    )
+                )
             }
         )
     }

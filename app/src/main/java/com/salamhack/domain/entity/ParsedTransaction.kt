@@ -6,7 +6,5 @@ data class ParsedTransaction(
     val isIncome: Boolean,
     val categoryId: String,
     val date: String,
-    val time: String,
-    val transactionDate: String,
-    val confidence: Double
+    val merchant: String
 )
