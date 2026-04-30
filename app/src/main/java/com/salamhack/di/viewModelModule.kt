@@ -21,5 +21,5 @@ val viewModelModule = module {
     viewModel { VerifyOTPViewModel() }
     viewModel { HomeViewModel(get()) }
     viewModel { AddTransactionViewModel(get()) }
-    viewModel { ChatBotViewModel() }
+    viewModel { ChatBotViewModel(get(), get()) }
 }
