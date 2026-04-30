@@ -1,7 +1,9 @@
 package com.salamhack.data.source.remote.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class UserDto(
-    val name: String,
-    val profileImage: String,
-    val hasNotification: Boolean
+    @SerializedName("name") val name: String?,
+    @SerializedName("profileImage") val profileImage: String?,
+    @SerializedName("hasNotification") val hasNotification: Boolean?
 )

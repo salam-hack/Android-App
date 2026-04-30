@@ -26,7 +26,7 @@ val networkModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("https://your-api.com/")
+            .baseUrl("https://modaberbackend.sell-io.app/")
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
