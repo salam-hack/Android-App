@@ -34,7 +34,10 @@ fun TargetCard(
     saverAmount: String,
     percentage: Float,
     @DrawableRes icon: Int,
-    remainingMonths: String
+    remainingMonths: String,
+    description: String = "بمعدل ادخارك الحالي، ستصل لهدفك في ",
+    color: Color = Color(0xFFB89020),
+    isEmergency: Boolean = false
 ){
     Box(
         modifier = modifier
@@ -47,6 +50,7 @@ fun TargetCard(
             modifier = Modifier
                 .align(Alignment.TopStart),
             percentage = percentage.toInt(),
+            color = color
         )
         Column(
             modifier = Modifier
@@ -90,7 +94,7 @@ fun TargetCard(
             AppProgressBar(
                 modifier = Modifier.padding(top = 18.dp),
                 percentage = percentage,
-                color = Color(0xFFDDBF5F)
+                color = color.copy(alpha = 0.8f)
             )
 
             Row(
@@ -106,7 +110,11 @@ fun TargetCard(
                                 color = Theme.colors.graySubTitles,
                             ).toSpanStyle()
                         ) {
-                            append("المدخر: ")
+                            if (isEmergency){
+                                append("الهدف: ")
+                            } else {
+                                append("المدخر: ")
+                            }
                         }
 
                         withStyle(
@@ -126,7 +134,11 @@ fun TargetCard(
                                 color = Theme.colors.graySubTitles,
                             ).toSpanStyle()
                         ) {
-                            append("الهدف: ")
+                            if (isEmergency) {
+                                append("الرصيد: ")
+                            } else {
+                                append("الهدف: ")
+                            }
                         }
 
                         withStyle(
@@ -140,52 +152,76 @@ fun TargetCard(
                 )
             }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 12.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(Color(0xFFEFF6FF))
-                    .border(1.dp, Color(0xFFDBEAFE), RoundedCornerShape(16.dp)),
-                contentAlignment = Alignment.CenterEnd
-            ){
+            if(isEmergency){
                 Row(
                     modifier = Modifier
-                        .padding(horizontal = 14.dp, vertical = 17.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(vertical = 24.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .padding(end = 2.dp)
-                            .background(Theme.colors.bluePrimary, shape = RoundedCornerShape(4.dp))
-                    ){
-                        Text(
-                            text = "$remainingMonths أشهر",
-                            style = Theme.textStyle.title.sub.copy(
-                                fontSize = 12.sp,
-                                textDirection = TextDirection.Rtl,
-                                color = Theme.colors.white
-                            ),
-                            modifier = Modifier
-                                .padding(vertical = 1.dp, horizontal = 6.dp)
-                        )
-                    }
                     Text(
-                        text = "بمعدل ادخارك الحالي، ستصل لهدفك في ",
-                        style = Theme.textStyle.title.sub.copy(
+                        text = description,
+                        style = Theme.textStyle.title.regular.copy(
                             fontSize = 12.sp,
-                            textDirection = TextDirection.Rtl,
-                            color = Theme.colors.bluePrimary
-                        ),
-                        modifier = Modifier
-                            .padding(end = 12.dp)
+                            color = Color(0xFF0F3A70),
+                            textDirection = TextDirection.Rtl
+                        )
                     )
-                    Image(
-                        painter = painterResource(id = R.drawable.emoji_robot),
-                        contentDescription = null
+                    Icon(
+                        painter = painterResource(R.drawable.ic_true_2),
+                        contentDescription = null,
+                        tint = Theme.colors.lightGreen
                     )
                 }
 
+            }else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 12.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Color(0xFFEFF6FF))
+                        .border(1.dp, Color(0xFFDBEAFE), RoundedCornerShape(16.dp)),
+                    contentAlignment = Alignment.CenterEnd
+                ){
+                    Row(
+                        modifier = Modifier
+                            .padding(horizontal = 14.dp, vertical = 17.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .padding(end = 2.dp)
+                                .background(Theme.colors.bluePrimary, shape = RoundedCornerShape(4.dp))
+                        ){
+                            Text(
+                                text = "$remainingMonths أشهر",
+                                style = Theme.textStyle.title.sub.copy(
+                                    fontSize = 12.sp,
+                                    textDirection = TextDirection.Rtl,
+                                    color = Theme.colors.white
+                                ),
+                                modifier = Modifier
+                                    .padding(vertical = 1.dp, horizontal = 6.dp)
+                            )
+                        }
+                        Text(
+                            text = description,
+                            style = Theme.textStyle.title.sub.copy(
+                                fontSize = 12.sp,
+                                textDirection = TextDirection.Rtl,
+                                color = Theme.colors.bluePrimary
+                            ),
+                            modifier = Modifier
+                                .padding(end = 12.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.emoji_robot),
+                            contentDescription = null
+                        )
+                    }
+
+                }
             }
         }
 
@@ -196,7 +232,7 @@ fun TargetCard(
 fun PercentageHolder(
     modifier: Modifier = Modifier,
     percentage: Int,
-    color: Color = Color(0xFFB89020)
+    color: Color
 ){
     Box(
         modifier = modifier
