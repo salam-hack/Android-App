@@ -97,16 +97,25 @@ AddTransactionInteractionListener {
     override fun onClickConfirmAnalysis() {
         val parsed = screenState.value.parsedTransaction
         if (parsed != null) {
+            val type = if (parsed.isIncome) TransactionType.INCOME else TransactionType.EXPENSE
+
+            val extractedCategory = if (parsed.isIncome) {
+                LocalCategoriesDataSource.getIncomeById(parsed.categoryId)
+            } else {
+                LocalCategoriesDataSource.getExpenseById(parsed.categoryId)
+            }
+
             updateState(
                 screenState.value.copy(
                     titleInput = parsed.title,
                     amountInput = parsed.amount.toString(),
-                    transactionType = if (parsed.isIncome) TransactionType.INCOME else TransactionType.EXPENSE,
+                    transactionType = type,
                     inputType = InputType.ManualInput,
+                    selectedCategory = extractedCategory,
                     bottomSheet = screenState.value.bottomSheet.copy(isVisible = false)
                 )
             )
-            loadCategories(if (parsed.isIncome) TransactionType.INCOME else TransactionType.EXPENSE)
+            loadCategories(type)
         }
     }
 
