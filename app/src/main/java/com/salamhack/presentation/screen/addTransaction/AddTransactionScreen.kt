@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
+import com.salamhack.data.source.local.LocalCategoriesDataSource
 import com.salamhack.domain.entity.InputType
 import com.salamhack.domain.entity.TransactionType
 import com.salamhack.presentation.shared.components.AddTransactionTypes
@@ -275,9 +276,13 @@ fun AddTransactionScreenContent(
             Column {
                 SmartInputResult(
                     isIncome = state.parsedTransaction?.isIncome == true,
-                    amount = state.parsedTransaction?.amount.toString(),
+                    amount = state.parsedTransaction?.amount?.toString() ?: "",
                     categoryIcon = getCategoryIcon(state.parsedTransaction?.categoryId ?: ""),
-                    category = state.selectedCategory?.name ?: "غير محدد",
+                    category = if (state.parsedTransaction?.isIncome == true) {
+                        LocalCategoriesDataSource.getIncomeById(state.parsedTransaction.categoryId)?.name ?: "غير محدد"
+                    } else {
+                        LocalCategoriesDataSource.getExpenseById(state.parsedTransaction?.categoryId ?: "")?.name ?: "غير محدد"
+                    },
                     date = state.parsedTransaction?.date ?: "",
                     note = state.parsedTransaction?.title ?: ""
                 )
