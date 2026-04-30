@@ -34,7 +34,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.salamhack.App
 import com.salamhack.R
 import com.salamhack.data.source.local.LocalCategoriesDataSource.getExpenseById
 import com.salamhack.data.source.local.LocalCategoriesDataSource.getIncomeById
@@ -53,7 +52,6 @@ import com.salamhack.presentation.shared.components.SmartInputResult
 import com.salamhack.presentation.shared.components.TransactionNoteTextField
 import com.salamhack.presentation.shared.designSystem.theme.Theme
 import com.salamhack.presentation.uiModel.getCategoryIcon
-import com.salamhack.presentation.uiModel.getCategoryName
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -240,7 +238,11 @@ fun AddTransactionScreenContent(
                         item {
 
                             MoneyTextField(
-                                placeholder = if(state.parsedTransaction?.amount == null) "200.00" else state.parsedTransaction.amount.toString(),
+                                placeholder = "200",
+                                onTextChange = {
+                                    action.onAmountChange(it)
+                                },
+                                value = state.amountInput
                             )
                         }
 
@@ -287,7 +289,10 @@ fun AddTransactionScreenContent(
                                 type = AppButtonType.Primary,
                                 modifier = Modifier
                                     .padding(vertical = 40.dp),
-                                onClick = {}
+                                onClick = {
+                                    action.onClickSaveTransaction()
+                                },
+                                isLoading = state.isLoading
                             )
                         }
                     }
@@ -324,8 +329,6 @@ fun AddTransactionScreenContent(
                         }
                     }
                 }
-
-
             }
         }
 

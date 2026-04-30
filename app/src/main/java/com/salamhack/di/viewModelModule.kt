@@ -20,6 +20,6 @@ val viewModelModule = module {
     viewModel { ResetPasswordViewModel() }
     viewModel { VerifyOTPViewModel() }
     viewModel { HomeViewModel(get()) }
-    viewModel { AddTransactionViewModel(get()) }
+    viewModel { AddTransactionViewModel(get(), get()) }
     viewModel { ChatBotViewModel(get(), get()) }
 }
