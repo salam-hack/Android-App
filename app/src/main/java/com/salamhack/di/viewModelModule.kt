@@ -2,6 +2,7 @@ package com.salamhack.di
 
 
 import com.salamhack.presentation.screen.addTransaction.AddTransactionViewModel
+import com.salamhack.presentation.screen.allTransaction.AllTransactionViewModel
 import com.salamhack.presentation.screen.chatBot.ChatBotViewModel
 import com.salamhack.presentation.screen.chatBotHistory.ChatBotHistoryViewModel
 import com.salamhack.presentation.screen.createAccount.CreateAccountViewModel
@@ -28,4 +29,5 @@ val viewModelModule = module {
     viewModel { ChatBotHistoryViewModel(get()) }
     viewModel { GoalsViewModel() }
     viewModel { NotificationViewModel() }
+    viewModel { AllTransactionViewModel() }
 }

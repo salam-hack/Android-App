@@ -72,6 +72,6 @@ class HomeViewModel(
     }
 
     override fun onClickViewAllTransaction() {
-//        navigate(Destinations.AllAddTransaction)
+        navigate(Destinations.AllTransaction)
     }
 }
