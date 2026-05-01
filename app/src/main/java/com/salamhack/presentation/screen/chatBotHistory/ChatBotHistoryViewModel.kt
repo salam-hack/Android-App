@@ -1,5 +1,6 @@
 package com.salamhack.presentation.screen.chatBotHistory
 
+import android.util.Log
 import com.salamhack.domain.usecase.GetChatHistoryUseCase
 import com.salamhack.presentation.navigation.Destinations
 import com.salamhack.presentation.shared.utils.BaseViewModel
@@ -55,7 +56,7 @@ class ChatBotHistoryViewModel(
     }
 
     override fun onClickChat(chatId: String) {
-        // navigate(Destinations.ChatBot(chatId))
+        navigate(Destinations.ChatBot(chatId = chatId))
     }
 
     override fun onSearchChat(query: String) {
@@ -78,6 +79,6 @@ class ChatBotHistoryViewModel(
     }
 
     override fun onClickNewChat() {
-        navigate(Destinations.ChatBot)
+        navigate(Destinations.ChatBot())
     }
 }

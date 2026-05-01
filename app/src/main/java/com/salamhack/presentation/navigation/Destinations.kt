@@ -60,7 +60,9 @@ sealed interface Destinations : Graph {
     data object Obligations : Destination
 
     @Serializable
-    data object ChatBot : Destination
+    data class ChatBot(
+        val chatId: String? = null
+    ) : Destination
 
     @Serializable
     data object ChatBotHistory : Destination

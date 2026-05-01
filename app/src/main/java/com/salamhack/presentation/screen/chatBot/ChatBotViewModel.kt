@@ -1,6 +1,8 @@
 package com.salamhack.presentation.screen.chatBot
 
+import androidx.lifecycle.SavedStateHandle
 import com.salamhack.domain.usecase.CreateConversationUseCase
+import com.salamhack.domain.usecase.GetChatTurnsUseCase
 import com.salamhack.domain.usecase.SendMessageUseCase
 import com.salamhack.presentation.navigation.Destinations
 import com.salamhack.presentation.shared.utils.BaseViewModel
@@ -10,13 +12,59 @@ import java.util.Locale
 import java.util.UUID
 
 class ChatBotViewModel(
+    savedStateHandle: SavedStateHandle,
     private val createConversationUseCase: CreateConversationUseCase,
-    private val sendMessageUseCase: SendMessageUseCase
+    private val sendMessageUseCase: SendMessageUseCase,
+    private val getChatTurnsUseCase: GetChatTurnsUseCase
 ): BaseViewModel<ChatBotUiState>(ChatBotUiState()),
 ChatBotInteractionListener{
 
     private val userId = "550e8400-e29b-41d4-a716-446655440001"
 
+    init {
+        val passedConversationId = savedStateHandle.get<String>("chatId")
+
+        if (!passedConversationId.isNullOrBlank()) {
+            updateState(screenState.value.copy(conversationId = passedConversationId))
+            loadChatTurns(passedConversationId)
+        }
+    }
+
+    private fun loadChatTurns(conversationId: String) {
+        tryToObserve(
+            observe = { getChatTurnsUseCase(userId = userId, conversationId = conversationId) },
+            onStart = {
+                updateState(screenState.value.copy(error = null))
+            },
+            onEach = { result ->
+                result?.fold(
+                    onSuccess = { messageEntities ->
+                        val chatMessages = messageEntities.map { entity ->
+                            ChatMessage(
+                                id = entity.id,
+                                text = entity.content,
+                                sender = if (entity.role == "user") MessageSender.USER else MessageSender.ASSISTANT,
+                                time = getCurrentFormattedTime()
+                            )
+                        }
+
+                        updateState(
+                            screenState.value.copy(
+                                messages = chatMessages
+                            )
+                        )
+                    },
+                    onFailure = { error ->
+                        updateState(
+                            screenState.value.copy(
+                                error = "فشل تحميل المحادثة: ${error.message}"
+                            )
+                        )
+                    }
+                )
+            }
+        )
+    }
 
     override fun onClickBack() {
         navigateUp()

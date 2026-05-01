@@ -1,13 +1,9 @@
 package com.salamhack.data.source.remote.chatBot.api
 
-import com.salamhack.data.source.remote.chatBot.dto.ChatListRequestDto
-import com.salamhack.data.source.remote.chatBot.dto.ChatListResponseDto
-import com.salamhack.data.source.remote.chatBot.dto.CreateChatRequestDto
-import com.salamhack.data.source.remote.chatBot.dto.CreateChatResponseDto
-import com.salamhack.data.source.remote.chatBot.dto.SendMessageRequestDto
-import com.salamhack.data.source.remote.chatBot.dto.SendMessageResponseDto
+import com.salamhack.data.source.remote.chatBot.dto.*
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ChatApiService {
     @POST("api/chat/new")
@@ -18,4 +14,10 @@ interface ChatApiService {
 
     @POST("api/chat/list")
     suspend fun getChatHistory(@Body request: ChatListRequestDto): ChatListResponseDto
+
+    @POST("api/chat/{conversationId}/turns")
+    suspend fun getChatTurns(
+        @Path("conversationId") conversationId: String,
+        @Body request: GetChatTurnsRequestDto
+    ): GetChatTurnsResponseDto
 }

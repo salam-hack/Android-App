@@ -212,7 +212,7 @@ fun NavBar(
                 .then(glow)
                 .clickable {
                     coroutineScope.launch {
-                        navigator.navigate(Destinations.ChatBot)
+                        navigator.navigate(Destinations.ChatBot())
                     }
                 }
         ){
