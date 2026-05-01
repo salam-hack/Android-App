@@ -6,8 +6,8 @@ Feeling confused about where your money goes every month?
 
 **Don’t worry! Modabber is here to help. 🚀**
 <img width="7680" height="4096" alt="Portfolio Cover" src="https://github.com/user-attachments/assets/842bc22a-06fa-4ec5-aa7c-4e26722b1720" />
-
-
+**Presentation Slides**
+https://canva.link/peuy1m8ghu4q0ai
 ---
 
 # 💡 What is Modabber?
