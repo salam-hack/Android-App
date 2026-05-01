@@ -13,6 +13,7 @@ import com.salamhack.presentation.screen.home.HomeScreen
 import com.salamhack.presentation.screen.login.LoginScreen
 import com.salamhack.presentation.screen.more.MoreScreen
 import com.salamhack.presentation.screen.newPassword.NewPasswordScreen
+import com.salamhack.presentation.screen.notification.NotificationScreen
 import com.salamhack.presentation.screen.obligations.ObligationsScreen
 import com.salamhack.presentation.screen.resetPassword.ResetPasswordScreen
 import com.salamhack.presentation.screen.verifyOTP.VerifyOTPScreen
@@ -90,7 +91,7 @@ fun NavGraphBuilder.buildAppNavGraph() {
         composable<Destinations.Obligations> { ObligationsScreen() }
         composable<Destinations.ChatBot> { ChatBotScreen() }
         composable<Destinations.ChatBotHistory> { ChatBotHistoryScreen() }
-        composable<Destinations.Notification> { ChatBotHistoryScreen() }
+        composable<Destinations.Notification> { NotificationScreen() }
         composable<Destinations.AddGoal> { AddGoalScreen() }
     }
 }

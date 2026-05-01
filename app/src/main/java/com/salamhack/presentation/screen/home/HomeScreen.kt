@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -64,21 +65,21 @@ fun HomeScreenContent(
             .background(Color(0xFFF6F7FD))
             .statusBarsPadding()
     ){
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(253.dp)
+                .background(Theme.colors.bluePrimary)
+        )
         // blue section
         Image(
             painter = painterResource(id = R.drawable.login_bg),
             contentDescription = null,
+            contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(253.dp)
         )
-        Box(
-            modifier = Modifier
-            .fillMaxWidth()
-            .height(253.dp)
-            .background(Theme.colors.bluePrimary.copy(alpha = 0.8f))
-        )
-
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -94,6 +95,9 @@ fun HomeScreenContent(
                 Box(
                     modifier = Modifier
                         .background(Theme.colors.white, shape = RoundedCornerShape(16.dp))
+                        .clickable{
+                            action.onClickNotification()
+                        }
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.img_notification),

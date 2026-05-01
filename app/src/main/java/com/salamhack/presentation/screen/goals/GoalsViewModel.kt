@@ -1,10 +1,11 @@
 package com.salamhack.presentation.screen.goals
 
+import com.salamhack.presentation.navigation.Destinations
 import com.salamhack.presentation.shared.utils.BaseViewModel
 
 class GoalsViewModel(): BaseViewModel<GoalsUiState>(GoalsUiState()), GoalsInteractionListener {
     override fun onClickNotification() {
-        TODO("Not yet implemented")
+        navigate(Destinations.Notification)
     }
 
     override fun onClickGoal() {

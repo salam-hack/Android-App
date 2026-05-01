@@ -5,9 +5,11 @@ import com.salamhack.presentation.screen.addTransaction.AddTransactionViewModel
 import com.salamhack.presentation.screen.chatBot.ChatBotViewModel
 import com.salamhack.presentation.screen.chatBotHistory.ChatBotHistoryViewModel
 import com.salamhack.presentation.screen.createAccount.CreateAccountViewModel
+import com.salamhack.presentation.screen.goals.GoalsViewModel
 import com.salamhack.presentation.screen.home.HomeViewModel
 import com.salamhack.presentation.screen.login.LoginViewModel
 import com.salamhack.presentation.screen.newPassword.NewPasswordViewModel
+import com.salamhack.presentation.screen.notification.NotificationViewModel
 import com.salamhack.presentation.screen.resetPassword.ResetPasswordViewModel
 import com.salamhack.presentation.screen.verifyOTP.VerifyOTPViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -24,4 +26,6 @@ val viewModelModule = module {
     viewModel { AddTransactionViewModel(get(), get()) }
     viewModel { ChatBotViewModel(get(), get(), get(), get()) }
     viewModel { ChatBotHistoryViewModel(get()) }
+    viewModel { GoalsViewModel() }
+    viewModel { NotificationViewModel() }
 }
