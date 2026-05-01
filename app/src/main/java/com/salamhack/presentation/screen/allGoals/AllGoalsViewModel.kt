@@ -1,6 +1,7 @@
 package com.salamhack.presentation.screen.allGoals
 
 import com.salamhack.presentation.navigation.Destinations
+import com.salamhack.presentation.shared.components.GoalStatus
 import com.salamhack.presentation.shared.utils.BaseViewModel
 
 class AllGoalsViewModel(): BaseViewModel<AllGoalsUiState>(AllGoalsUiState()),
@@ -14,12 +15,16 @@ AllGoalsInteractionListener{
         navigate(Destinations.AddGoal)
     }
 
-    override fun onSelectGoalStatus() {
-        TODO("Not yet implemented")
+    override fun onSelectGoalStatus(status: GoalStatus) {
+        updateState(
+            newState = screenState.value.copy(
+                selectedGoalStatus = status
+            )
+        )
     }
 
     override fun onClickGoalDetails() {
-        TODO("Not yet implemented")
+        navigate(Destinations.GoalDetails)
     }
 
 }

@@ -1,8 +1,12 @@
 package com.salamhack.presentation.screen.addGoal
 
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -18,6 +22,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,27 +32,36 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
 import com.salamhack.presentation.shared.components.AppButton
 import com.salamhack.presentation.shared.components.AppButtonType
 import com.salamhack.presentation.shared.components.GoalIcon
 import com.salamhack.presentation.shared.components.GoalIconSelector
 import com.salamhack.presentation.shared.components.MoneyTextField
-import com.salamhack.presentation.shared.components.PriorityLevel
 import com.salamhack.presentation.shared.components.PrioritySelector
 import com.salamhack.presentation.shared.components.TargetDateSelector
 import com.salamhack.presentation.shared.components.TargetDateUiState
 import com.salamhack.presentation.shared.components.TransactionNoteTextField
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun AddGoalScreen(){
-    AddGoalScreenContent()
+fun AddGoalScreen(
+    viewModel: AddGoalViewModel = koinViewModel()
+){
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
+    AddGoalScreenContent(
+        action = viewModel,
+        state = state
+    )
 }
 
 @Composable
 fun AddGoalScreenContent(
     modifier: Modifier = Modifier,
+    action: AddGoalInteractionListener,
+    state: AddGoalUiState
 ){
     val mockIcons = listOf(
         GoalIcon("car", R.drawable.ic_car, Color(0xFFB89020)),
@@ -98,7 +112,10 @@ fun AddGoalScreenContent(
                 .padding(top = 28.dp, end = 18.dp)
                 .size(44.dp)
                 .background(Theme.colors.white, shape = RoundedCornerShape(16.dp))
-                .align(Alignment.TopEnd),
+                .align(Alignment.TopEnd)
+                .clickable{
+                    action.onClickBack()
+                },
             contentAlignment = Alignment.Center
         ){
             Icon(
@@ -131,8 +148,10 @@ fun AddGoalScreenContent(
                     GoalIconSelector(
                         title = "اختر أيقونة للهدف",
                         icons = mockIcons,
-                        selectedIconId = "",
-                        onIconSelected = {},
+                        selectedIconId = state.selectedIconId,
+                        onIconSelected = {
+                            action.onSelectIcon(it)
+                        },
                         modifier = Modifier
                             .padding(top = 32.dp),
                     )
@@ -140,8 +159,8 @@ fun AddGoalScreenContent(
                 item {
                     TransactionNoteTextField(
                         modifier = Modifier.padding(top = 24.dp),
-                        value = "",
-                        onValueChange = {  },
+                        value = state.title,
+                        onValueChange = { action.onTitleChange(it) },
                         label = "اسم الهدف",
                         placeholder = "سيارة أحلامي",
                         icon = null
@@ -160,8 +179,8 @@ fun AddGoalScreenContent(
                     ){
                         MoneyTextField(
                             placeholder = "200",
-                            value = "",
-                            onTextChange = {  },
+                            value = state.amount,
+                            onTextChange = { action.onAmountChange(it) },
                             modifier = Modifier
                                 .align(Alignment.Center)
                                 .padding(20.dp)
@@ -172,18 +191,22 @@ fun AddGoalScreenContent(
                     TargetDateSelector(
                         title = "تاريخ التحقيق المتوقع",
                         state = TargetDateUiState(
-                            dateText = "ديسمبر 2025",
-                            remainingTimeText = "متبقي 20 شهر"
+                            dateText = state.targetDateText,
+                            remainingTimeText = state.remainingTimeText
                         ),
-                        onDateSelected = {  },
+                        onDateSelected = { millis ->
+                            val formatter = SimpleDateFormat("MMMM yyyy", Locale("ar"))
+                            val formattedDate = formatter.format(Date(millis))
+                            action.onDateChange(dateText = formattedDate)
+                        },
                         modifier = Modifier
                             .padding(top = 24.dp),
                     )
                 }
                 item {
                     PrioritySelector(
-                        selectedPriority = PriorityLevel.HIGH,
-                        onPrioritySelected = {},
+                        selectedPriority = state.selectedPriority,
+                        onPrioritySelected = { action.onSelectPriority(it) },
                         modifier = Modifier
                             .padding(top = 24.dp)
                     )
@@ -213,7 +236,9 @@ fun AddGoalScreenContent(
                         .padding(horizontal = 16.dp)
                         .padding(top = 16.dp),
                     type = AppButtonType.Primary,
-                    onClick = {},
+                    onClick = {
+                        action.onClickCreateGoal()
+                    },
                     isLoading = false,
                 )
             }

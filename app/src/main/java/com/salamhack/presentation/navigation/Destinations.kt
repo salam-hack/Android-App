@@ -5,10 +5,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.salamhack.presentation.screen.addGoal.AddGoalScreen
 import com.salamhack.presentation.screen.addTransaction.AddTransactionScreen
+import com.salamhack.presentation.screen.allGoals.AllGoalsScreen
 import com.salamhack.presentation.screen.allTransaction.AllTransactionScreen
 import com.salamhack.presentation.screen.chatBot.ChatBotScreen
 import com.salamhack.presentation.screen.chatBotHistory.ChatBotHistoryScreen
 import com.salamhack.presentation.screen.createAccount.CreateAccountScreen
+import com.salamhack.presentation.screen.goalDetails.GoalDetailsScreen
 import com.salamhack.presentation.screen.goals.GoalsScreen
 import com.salamhack.presentation.screen.home.HomeScreen
 import com.salamhack.presentation.screen.login.LoginScreen
@@ -79,6 +81,12 @@ sealed interface Destinations : Graph {
     @Serializable
     data object AllTransaction : Destination
 
+    @Serializable
+    data object AllGoals : Destination
+
+    @Serializable
+    data object GoalDetails : Destination
+
 }
 
 fun NavGraphBuilder.buildAppNavGraph() {
@@ -98,5 +106,7 @@ fun NavGraphBuilder.buildAppNavGraph() {
         composable<Destinations.Notification> { NotificationScreen() }
         composable<Destinations.AddGoal> { AddGoalScreen() }
         composable<Destinations.AllTransaction> { AllTransactionScreen() }
+        composable<Destinations.AllGoals> { AllGoalsScreen() }
+        composable<Destinations.GoalDetails> { GoalDetailsScreen() }
     }
 }

@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,6 +29,7 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
 import com.salamhack.presentation.shared.components.AmountSummaryCard
 import com.salamhack.presentation.shared.components.AppButton
@@ -36,15 +38,24 @@ import com.salamhack.presentation.shared.components.CircularProgressView
 import com.salamhack.presentation.shared.components.RemainingTimeCard
 import com.salamhack.presentation.shared.components.TransactionGoalItem
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun GoalDetailsScreen(){
-    GoalDetailsScreenContent()
+fun GoalDetailsScreen(
+    viewModel: GoalDetailsViewModel = koinViewModel()
+){
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
+    GoalDetailsScreenContent(
+        action = viewModel,
+        state = state
+    )
 }
 
 @Composable
 fun GoalDetailsScreenContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    action: GoalDetailsInteractionListener,
+    state: GoalDetailsUiState
 ){
     Box(
         modifier = modifier
@@ -86,7 +97,10 @@ fun GoalDetailsScreenContent(
                 .padding(top = 28.dp, end = 18.dp)
                 .size(44.dp)
                 .background(Theme.colors.white, shape = RoundedCornerShape(16.dp))
-                .align(Alignment.TopEnd),
+                .align(Alignment.TopEnd)
+                .clickable{
+                    action.onClickBack()
+                },
             contentAlignment = Alignment.Center
         ){
             Icon(
@@ -183,7 +197,9 @@ fun GoalDetailsScreenContent(
                             text = "إضافة مبلغ للهدف",
                             type = AppButtonType.PrimaryOutline,
                             icon = R.drawable.ic_add,
-                            onClick = {}
+                            onClick = {
+
+                            }
                         )
                         Row(
                             modifier = Modifier
