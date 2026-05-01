@@ -185,17 +185,17 @@ fun HomeScreenContent(
                         description = goal?.message ?: ""
                     )
                 }
-
-                item {
-                    val smartAnalysis = state.data?.smartAnalysis?.first()
-                    SmartAnalysisCard(
-                        description = smartAnalysis?.description ?: "إنفاقك على الترفيه أقل هذا الأسبوع. يمكنك إضافة",
-                        amount = 500,
-                        trackedItemTitle = "Mackbook",
-                        onClickAdd = {}
-                    )
+                if(state.data?.smartAnalysis?.isEmpty() != true){
+                    item {
+                        val smartAnalysis = state.data?.smartAnalysis?.first()
+                        SmartAnalysisCard(
+                            description = smartAnalysis?.description ?: "إنفاقك على الترفيه أقل هذا الأسبوع. يمكنك إضافة",
+                            amount = 500,
+                            trackedItemTitle = "Mackbook",
+                            onClickAdd = {}
+                        )
+                    }
                 }
-
                 item {
                     val transactions = state.data?.transactions ?: emptyList()
 
