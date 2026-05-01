@@ -1,5 +1,6 @@
 package com.salamhack.presentation.shared.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -32,19 +33,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.salamhack.R
 import com.salamhack.presentation.navigation.Destination
 import com.salamhack.presentation.navigation.Destinations
+import com.salamhack.presentation.navigation.Graph
+import com.salamhack.presentation.navigation.NavigationEvent
 import com.salamhack.presentation.navigation.Navigator
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -216,13 +221,15 @@ fun NavBar(
                     }
                 }
         ){
-            Icon(
-                painter = painterResource(R.drawable.ic_star),
+            Image(
+                painter = painterResource(R.drawable.img_rashid_hello),
                 contentDescription = null,
-                tint = Color.White,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .size(28.dp)
+                    .width(23.dp)
+                    .height(33.dp),
+
             )
         }
 
@@ -293,6 +300,28 @@ data class NavItemData(
 @Composable
 private fun Preview(){
     NavBar(
-        navHostController = NavHostController(LocalContext.current)
+        navHostController = androidx.navigation.compose.rememberNavController(),
+        navigator = object : Navigator {
+            suspend fun navigate(destination: Destination) {
+                // Do nothing in preview
+            }
+
+            override val startGraph: Graph
+                get() = TODO("Not yet implemented")
+            override val navigationEvent: Flow<NavigationEvent>
+                get() = TODO("Not yet implemented")
+
+            override suspend fun navigate(
+                destination: Destination,
+                navOptions: NavOptions?
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override suspend fun navigateUp() {
+                TODO("Not yet implemented")
+            }
+            // Add any other required methods from the Navigator interface here with empty bodies
+        }
     )
 }

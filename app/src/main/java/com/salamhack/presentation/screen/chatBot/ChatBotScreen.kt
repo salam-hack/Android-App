@@ -116,7 +116,7 @@ fun ChatBotScreenContent(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "المساعد الذكي",
+                        text = "رشيد",
                         style = Theme.textStyle.title.regular.copy(
                             fontSize = 18.sp,
                             color = Theme.colors.white,
