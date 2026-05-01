@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,21 +28,30 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
-import com.salamhack.presentation.shared.components.GoalStatus
 import com.salamhack.presentation.shared.components.GoalStatusSelector
 import com.salamhack.presentation.shared.components.TargetCard
 import com.salamhack.presentation.shared.components.TotalWealth
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun AllGoalsScreen(){
-    AllGoalsScreenContent()
+fun AllGoalsScreen(
+    viewModel: AllGoalsViewModel = koinViewModel()
+){
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
+    AllGoalsScreenContent(
+        action = viewModel,
+        state = state
+    )
 }
 
 @Composable
 fun AllGoalsScreenContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    action: AllGoalsInteractionListener,
+    state: AllGoalsUiState
 ){
     Box(
         modifier = modifier
@@ -88,7 +98,10 @@ fun AllGoalsScreenContent(
                         .padding(top = 28.dp, end = 18.dp)
                         .size(44.dp)
                         .background(Theme.colors.white, shape = RoundedCornerShape(16.dp))
-                        .align(Alignment.TopEnd),
+                        .align(Alignment.TopEnd)
+                        .clickable{
+                            action.onClickBack()
+                        },
                     contentAlignment = Alignment.Center
                 ){
                     Icon(
@@ -125,8 +138,10 @@ fun AllGoalsScreenContent(
                 }
                 item {
                     GoalStatusSelector(
-                        selectedStatus = GoalStatus.ACTIVE,
-                        onStatusSelected = {}
+                        selectedStatus = state.selectedGoalStatus,
+                        onStatusSelected = {
+                            action.onSelectGoalStatus(it)
+                        }
                     )
                 }
                 item {
@@ -140,7 +155,10 @@ fun AllGoalsScreenContent(
                         Box(
                             modifier = Modifier
                                 .background(Color(0xFFF1F5F9), shape = CircleShape)
-                                .size(44.dp),
+                                .size(44.dp)
+                                .clickable{
+                                    action.onClickAddGoal()
+                                },
                             contentAlignment = Alignment.Center
                         ){
                             Icon(
@@ -167,7 +185,10 @@ fun AllGoalsScreenContent(
                         saverAmount = "20,000",
                         percentage = 25f,
                         icon = R.drawable.ic_laptop,
-                        remainingMonths = "10"
+                        remainingMonths = "10",
+                        modifier = Modifier.clickable {
+                            action.onClickGoalDetails()
+                        }
                     )
                 }
             }

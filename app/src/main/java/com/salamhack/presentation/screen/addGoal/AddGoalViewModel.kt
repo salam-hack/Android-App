@@ -1,34 +1,47 @@
 package com.salamhack.presentation.screen.addGoal
 
+import com.salamhack.presentation.shared.components.PriorityLevel
 import com.salamhack.presentation.shared.utils.BaseViewModel
 
 class AddGoalViewModel(): BaseViewModel<AddGoalUiState>(AddGoalUiState()),
     AddGoalInteractionListener {
-    override fun onSelectIcon() {
-        TODO("Not yet implemented")
+
+    override fun onSelectIcon(iconId: String) {
+        updateState(screenState.value.copy(selectedIconId = iconId))
     }
 
-    override fun onTitleChange() {
-        TODO("Not yet implemented")
+    override fun onTitleChange(title: String) {
+        updateState(screenState.value.copy(title = title))
     }
 
-    override fun onAmountChange() {
-        TODO("Not yet implemented")
+    override fun onAmountChange(amount: String) {
+        updateState(screenState.value.copy(amount = amount))
     }
 
-    override fun onDateChange() {
-        TODO("Not yet implemented")
+    override fun onDateChange(dateText: String) {
+        updateState(
+            screenState.value.copy(
+                targetDateText = dateText,
+            )
+        )
     }
 
-    override fun onSelectPriority() {
-        TODO("Not yet implemented")
+    override fun onSelectPriority(priority: PriorityLevel) {
+        updateState(screenState.value.copy(selectedPriority = priority))
     }
 
     override fun onClickBack() {
-        TODO("Not yet implemented")
+        navigateUp()
     }
 
     override fun onClickCreateGoal() {
-        TODO("Not yet implemented")
+        val currentState = screenState.value
+        updateState(
+            newState = currentState.copy(
+                isLoading = false,
+                error = "ستتوفر هذه الميزة قريبا"
+            )
+        )
+        navigateUp()
     }
 }

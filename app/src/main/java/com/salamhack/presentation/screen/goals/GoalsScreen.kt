@@ -204,7 +204,7 @@ fun GoalsScreenContent(
                             ),
                             modifier = Modifier
                                 .clickable {
-
+                                    action.onClickViewAllGoals()
                                 }
                         )
                         Text(
@@ -226,7 +226,10 @@ fun GoalsScreenContent(
                             saverAmount = "20,000",
                             percentage = 25f,
                             icon = R.drawable.ic_laptop,
-                            remainingMonths = "10"
+                            remainingMonths = "10",
+                            modifier = Modifier.clickable {
+                                action.onClickGoal()
+                            }
                         )
                         TargetCard(
                             title = "شراء MacBook Pro",
@@ -234,7 +237,10 @@ fun GoalsScreenContent(
                             saverAmount = "20,000",
                             percentage = 25f,
                             icon = R.drawable.ic_laptop,
-                            remainingMonths = "10"
+                            remainingMonths = "10",
+                            modifier = Modifier.clickable {
+                                action.onClickGoal()
+                            }
                         )
                     }
                 }

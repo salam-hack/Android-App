@@ -9,10 +9,10 @@ class GoalsViewModel(): BaseViewModel<GoalsUiState>(GoalsUiState()), GoalsIntera
     }
 
     override fun onClickGoal() {
-        TODO("Not yet implemented")
+        navigate(Destinations.GoalDetails)
     }
 
     override fun onClickViewAllGoals() {
-        TODO("Not yet implemented")
+        navigate(Destinations.AllGoals)
     }
 }
