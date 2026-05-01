@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,20 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
 import com.salamhack.presentation.shared.components.AppButton
 import com.salamhack.presentation.shared.components.AppButtonType
 import com.salamhack.presentation.shared.components.AppPhoneTextField
-import com.salamhack.presentation.shared.components.IconHolder
-import com.salamhack.presentation.shared.designSystem.textStyle.ibm
 import com.salamhack.presentation.shared.designSystem.theme.Theme
 import org.koin.androidx.compose.koinViewModel
 
@@ -63,54 +61,27 @@ fun ResetPasswordScreenContent(
                 .fillMaxWidth()
                 .align(Alignment.TopCenter)
         ) {
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .height(253.dp)
+                .background(Theme.colors.bluePrimary)
+            )
             Image(
                 painter = painterResource(id = R.drawable.login_bg),
                 contentDescription = null,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(253.dp)
             )
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .height(253.dp)
-                .background(Theme.colors.bluePrimary.copy(alpha = 0.7f))
-            )
-            Row(
+            Icon(
+                painter = painterResource(id = R.drawable.ic_logo),
+                contentDescription = null,
+                tint = Theme.colors.white,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(top = 55.dp, end = 16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-            ){
-                Column {
-                    Text(
-                        text = "بوابــــــــــة الأمــــــــــــان",
-                        style = TextStyle(
-                            fontFamily = ibm,
-                            fontSize = 16.sp,
-                            color = Color.White,
-                            fontWeight = FontWeight.Bold,
-                            textDirection = TextDirection.Rtl
-                        ),
-                        modifier = Modifier.align(Alignment.End)
-                    )
-                    Text(
-                        text = "وصول موثوق وآمن لحساباتك المصرفية.",
-                        style = TextStyle(
-                            fontFamily = ibm,
-                            fontSize = 12.sp,
-                            color = Color(0xE6B1C7F3),
-                            fontWeight = FontWeight.Bold,
-                            textDirection = TextDirection.Rtl
-                        ),
-                        modifier = Modifier.align(Alignment.End)
-                    )
-                }
-                IconHolder(
-                    icon = R.drawable.ic_security,
-                    color = Color(0xFFFED65B)
-                )
-            }
+                    .padding(top = 55.dp, end = 16.dp)
+            )
         }
 
         // body
