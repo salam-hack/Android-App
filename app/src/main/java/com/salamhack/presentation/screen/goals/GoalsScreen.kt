@@ -19,28 +19,40 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.salamhack.R
 import com.salamhack.presentation.shared.components.SmartAnalysisAlertCard
 import com.salamhack.presentation.shared.components.TargetCard
 import com.salamhack.presentation.shared.components.TotalWealth
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun GoalsScreen(){
-    GoalsScreenContent()
+fun GoalsScreen(
+    viewModel: GoalsViewModel = koinViewModel()
+){
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
+    GoalsScreenContent(
+        action = viewModel,
+        state = state
+    )
 }
 
 @Composable
 fun GoalsScreenContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    action: GoalsInteractionListener,
+    state: GoalsUiState
 ){
     Box(
         modifier = modifier
@@ -58,6 +70,7 @@ fun GoalsScreenContent(
         Image(
             painter = painterResource(id = R.drawable.login_bg),
             contentDescription = null,
+            contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(253.dp)
@@ -78,6 +91,9 @@ fun GoalsScreenContent(
                 Box(
                     modifier = Modifier
                         .background(Theme.colors.white, shape = RoundedCornerShape(16.dp))
+                        .clickable{
+                            action.onClickNotification()
+                        }
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.img_notification),
