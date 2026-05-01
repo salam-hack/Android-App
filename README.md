@@ -5,6 +5,8 @@ Forgetting subscriptions and bills?
 Feeling confused about where your money goes every month?
 
 **Don’t worry! Modabber is here to help. 🚀**
+<img width="7680" height="4096" alt="Portfolio Cover" src="https://github.com/user-attachments/assets/842bc22a-06fa-4ec5-aa7c-4e26722b1720" />
+
 
 ---
 
@@ -88,10 +90,8 @@ Users can also:
 | Architecture | MVVM |
 | Navigation | Jetpack Navigation |
 | Dependency Injection | Koin |
-| Local Storage | Room Database |
 | Backend Integration | REST API |
 | AI Integration | AI-powered financial assistant/parser |
-| Testing | JUnit5 / Coroutine Testing / Mocking |
 
 ---
 
@@ -99,23 +99,6 @@ Users can also:
 
 - ✅ Android Application
 - 🌐 Future support planned for Web & iOS
-
----
-
-# 📽️ Demo & Features Preview
-
-| AI Chat Assistant | Add Expense | Analytics Dashboard | Savings Goals | Subscription Reminder |
-|------------------|-------------|---------------------|----------------|----------------------|
-| <img src="PUT_GIF_HERE/chat_assistant.gif" alt="AI Chat Assistant" width="170"/> | <img src="PUT_GIF_HERE/add_expense.gif" alt="Add Expense" width="170"/> | <img src="PUT_GIF_HERE/analytics.gif" alt="Analytics Dashboard" width="170"/> | <img src="PUT_GIF_HERE/savings_goal.gif" alt="Savings Goals" width="170"/> | <img src="PUT_GIF_HERE/subscription.gif" alt="Subscription Reminder" width="170"/> |
-
----
-
-# 📸 Screenshots
-## 🗣️ Arabic Language
-
-| Home Screen | AI Assistant | Transactions | Goals |
-|-------------|--------------|--------------|-------|
-| <img src="PUT_IMAGES_HERE/home_ar.png" alt="Home Arabic" width="170"/> | <img src="PUT_IMAGES_HERE/chat_ar.png" alt="Chat Arabic" width="170"/> | <img src="PUT_IMAGES_HERE/transactions_ar.png" alt="Transactions Arabic" width="170"/> | <img src="PUT_IMAGES_HERE/goals_ar.png" alt="Goals Arabic" width="170"/> |
 
 ---
 
