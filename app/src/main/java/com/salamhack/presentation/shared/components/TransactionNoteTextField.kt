@@ -43,7 +43,9 @@ fun TransactionNoteTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "ملاحظات (اختياري)..."
+    placeholder: String = "ملاحظات (اختياري)...",
+    label: String = "عنوان المعاملة",
+    icon: Int? = R.drawable.ic_notes
 ) {
     var isFocused by remember { mutableStateOf(false) }
 
@@ -59,7 +61,7 @@ fun TransactionNoteTextField(
         ) {
             // Label
             Text(
-                text = "عنوان المعاملة",
+                text = label,
                 style = Theme.textStyle.title.sub.copy(
                     color = textColor,
                 ),
@@ -86,12 +88,14 @@ fun TransactionNoteTextField(
                     },
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_notes),
-                    contentDescription = "Menu Icon",
-                    tint = iconColor,
-                    modifier = Modifier.size(24.dp)
-                )
+                if (icon != null){
+                    Icon(
+                        painter = painterResource(id = icon),
+                        contentDescription = "Menu Icon",
+                        tint = iconColor,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
 
                 Spacer(modifier = Modifier.width(12.dp))
 
