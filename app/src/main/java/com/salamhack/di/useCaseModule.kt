@@ -3,6 +3,7 @@ package com.salamhack.di
 import com.salamhack.domain.usecase.AddTransactionUseCase
 import com.salamhack.domain.usecase.CreateConversationUseCase
 import com.salamhack.domain.usecase.GetChatHistoryUseCase
+import com.salamhack.domain.usecase.GetChatTurnsUseCase
 import com.salamhack.domain.usecase.GetHomeUseCase
 import com.salamhack.domain.usecase.ParseTransactionUseCase
 import com.salamhack.domain.usecase.SendMessageUseCase
@@ -16,4 +17,5 @@ val useCaseModule = module {
     factory { CreateConversationUseCase(get()) }
     factory { AddTransactionUseCase(get()) }
     factory { GetChatHistoryUseCase(get()) }
+    factory { GetChatTurnsUseCase(get()) }
 }

@@ -10,4 +10,6 @@ interface ChatRepository {
     fun sendMessage(userId: String, conversationId: String, message: String): Flow<Result<MessageEntity>>
     fun getChatHistory(userId: String): Flow<Result<List<ChatHistoryEntity>>>
 
+    fun getChatTurns(userId: String, conversationId: String): Flow<Result<List<MessageEntity>>>
+
 }

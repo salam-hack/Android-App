@@ -1,18 +1,13 @@
 package com.salamhack.data.source.remote.chatBot
 
 import com.salamhack.data.source.remote.chatBot.api.ChatApiService
-import com.salamhack.data.source.remote.chatBot.dto.ChatListRequestDto
-import com.salamhack.data.source.remote.chatBot.dto.ChatListResponseDto
-import com.salamhack.data.source.remote.chatBot.dto.CreateChatRequestDto
-import com.salamhack.data.source.remote.chatBot.dto.CreateChatResponseDto
-import com.salamhack.data.source.remote.chatBot.dto.SendMessageRequestDto
-import com.salamhack.data.source.remote.chatBot.dto.SendMessageResponseDto
+import com.salamhack.data.source.remote.chatBot.dto.*
 
 interface ChatRemoteDataSource {
     suspend fun createConversation(userId: String, title: String? = null): CreateChatResponseDto
     suspend fun sendMessage(userId: String, conversationId: String, message: String): SendMessageResponseDto
     suspend fun getChatHistory(userId: String): ChatListResponseDto
-
+    suspend fun getChatTurns(userId: String, conversationId: String, limit: Int? = 50): GetChatTurnsResponseDto
 }
 
 class ChatRemoteDataSourceImpl(
@@ -29,5 +24,9 @@ class ChatRemoteDataSourceImpl(
 
     override suspend fun getChatHistory(userId: String): ChatListResponseDto {
         return api.getChatHistory(ChatListRequestDto(userId))
+    }
+
+    override suspend fun getChatTurns(userId: String, conversationId: String, limit: Int?): GetChatTurnsResponseDto {
+        return api.getChatTurns(conversationId, GetChatTurnsRequestDto(userId, limit))
     }
 }
