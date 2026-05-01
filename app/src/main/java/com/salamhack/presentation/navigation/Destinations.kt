@@ -17,8 +17,8 @@ import com.salamhack.presentation.screen.login.LoginScreen
 import com.salamhack.presentation.screen.more.MoreScreen
 import com.salamhack.presentation.screen.newPassword.NewPasswordScreen
 import com.salamhack.presentation.screen.notification.NotificationScreen
-import com.salamhack.presentation.screen.obligations.ObligationsScreen
 import com.salamhack.presentation.screen.resetPassword.ResetPasswordScreen
+import com.salamhack.presentation.screen.subscriptions.SubscriptionsScreen
 import com.salamhack.presentation.screen.verifyOTP.VerifyOTPScreen
 import kotlinx.serialization.Serializable
 
@@ -62,7 +62,7 @@ sealed interface Destinations : Graph {
     data object More : Destination
 
     @Serializable
-    data object Obligations : Destination
+    data object Subscriptions : Destination
 
     @Serializable
     data class ChatBot(
@@ -100,7 +100,7 @@ fun NavGraphBuilder.buildAppNavGraph() {
         composable<Destinations.AddTransaction> { AddTransactionScreen() }
         composable<Destinations.Goals> { GoalsScreen() }
         composable<Destinations.More> { MoreScreen() }
-        composable<Destinations.Obligations> { ObligationsScreen() }
+        composable<Destinations.Subscriptions> { SubscriptionsScreen() }
         composable<Destinations.ChatBot> { ChatBotScreen() }
         composable<Destinations.ChatBotHistory> { ChatBotHistoryScreen() }
         composable<Destinations.Notification> { NotificationScreen() }

@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -64,7 +65,7 @@ fun NavBar(
         NavItemData("الأهداف", R.drawable.ic_target, Destinations.Goals),
         NavItemData("الرئيسية", R.drawable.ic_home, Destinations.Home),
         NavItemData("المزيد", R.drawable.ic_more, Destinations.More),
-        NavItemData("الالتزامات", R.drawable.ic_obligations, Destinations.Obligations)
+        NavItemData("الالتزامات", R.drawable.ic_obligations, Destinations.Subscriptions)
     )
 
     val coroutineScope = rememberCoroutineScope()
@@ -237,7 +238,8 @@ fun NavBar(
             text = "رشيد",
             style = Theme.textStyle.title.regular.copy(
                 fontSize = 10.sp,
-                color = Color(0xFF0F3A70)
+                color = Color(0xFF0F3A70),
+                fontWeight = FontWeight.SemiBold
             ),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
