@@ -1,5 +1,7 @@
 package com.salamhack.data.source.remote.chatBot.api
 
+import com.salamhack.data.source.remote.chatBot.dto.ChatListRequestDto
+import com.salamhack.data.source.remote.chatBot.dto.ChatListResponseDto
 import com.salamhack.data.source.remote.chatBot.dto.CreateChatRequestDto
 import com.salamhack.data.source.remote.chatBot.dto.CreateChatResponseDto
 import com.salamhack.data.source.remote.chatBot.dto.SendMessageRequestDto
@@ -13,4 +15,7 @@ interface ChatApiService {
 
     @POST("api/chat/send")
     suspend fun sendMessage(@Body request: SendMessageRequestDto): SendMessageResponseDto
+
+    @POST("api/chat/list")
+    suspend fun getChatHistory(@Body request: ChatListRequestDto): ChatListResponseDto
 }
