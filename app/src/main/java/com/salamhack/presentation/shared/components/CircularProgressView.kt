@@ -36,8 +36,8 @@ import com.salamhack.presentation.shared.designSystem.theme.Theme
 fun CircularProgressView(
     percentage: Int,
     modifier: Modifier = Modifier,
-    size: Dp = 200.dp,
-    strokeWidth: Dp = 12.dp,
+    size: Dp = 225.dp,
+    strokeWidth: Dp = 10.dp,
     primaryColor: Color = Color(0xFF00449E),
     trackColor: Color = Color(0xFFE2E8F0),
     animationDuration: Int = 1000

@@ -28,6 +28,8 @@ sealed class AppButtonType {
     data object Secondary : AppButtonType()
     data object Danger : AppButtonType()
     data object Ghost : AppButtonType()
+
+//    data object PrimaryOutline : AppButtonType()
 }
 @Composable
 fun AppButton(
