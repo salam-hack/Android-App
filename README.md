@@ -132,5 +132,4 @@ Whether you’re a developer, designer, or someone with creative ideas — feel 
 - MVVM Architecture
 - Material 3
 - Koin Dependency Injection
-- Room Database
 - REST API Integration
