@@ -2,6 +2,7 @@ package com.salamhack.data.repository
 
 import com.salamhack.data.source.remote.chatBot.ChatRemoteDataSource
 import com.salamhack.data.source.remote.chatBot.mapper.toDomain
+import com.salamhack.domain.entity.ChatHistoryEntity
 import com.salamhack.domain.entity.ConversationEntity
 import com.salamhack.domain.entity.MessageEntity
 import com.salamhack.domain.repository.ChatRepository
@@ -32,6 +33,20 @@ class ChatRepositoryImpl(
                 emit(Result.success(response.assistantMessage.toDomain()))
             } else {
                 emit(Result.failure(Exception("فشل في استلام الرد")))
+            }
+        } catch (e: Exception) {
+            emit(Result.failure(e))
+        }
+    }
+
+    override fun getChatHistory(userId: String): Flow<Result<List<ChatHistoryEntity>>> = flow {
+        try {
+            val response = remote.getChatHistory(userId)
+            if (response.success && response.data != null) {
+                val mappedList = response.data.map { it.toDomain() }
+                emit(Result.success(mappedList))
+            } else {
+                emit(Result.failure(Exception("فشل في تحميل السجل")))
             }
         } catch (e: Exception) {
             emit(Result.failure(e))
