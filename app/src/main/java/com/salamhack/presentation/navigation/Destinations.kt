@@ -65,6 +65,9 @@ sealed interface Destinations : Graph {
     @Serializable
     data object ChatBotHistory : Destination
 
+    @Serializable
+    data object Notification : Destination
+
 }
 
 fun NavGraphBuilder.buildAppNavGraph() {
@@ -81,5 +84,6 @@ fun NavGraphBuilder.buildAppNavGraph() {
         composable<Destinations.Obligations> { ObligationsScreen() }
         composable<Destinations.ChatBot> { ChatBotScreen() }
         composable<Destinations.ChatBotHistory> { ChatBotHistoryScreen() }
+        composable<Destinations.Notification> { ChatBotHistoryScreen() }
     }
 }

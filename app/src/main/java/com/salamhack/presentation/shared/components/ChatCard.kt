@@ -34,12 +34,12 @@ import com.salamhack.presentation.shared.designSystem.theme.Theme
 
 @Composable
 fun ChatCard(
+    modifier: Modifier = Modifier,
     icon: Int,
     title: String,
     description: String,
     color: Color,
     time: String = "",
-    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier

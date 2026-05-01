@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -42,9 +43,13 @@ fun ReceivedMessageHolder(
     modifier: Modifier = Modifier,
 ){
     Row(
-        modifier = modifier
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End
     ) {
-        Column {
+        Column(
+            modifier = Modifier.weight(1f, fill = false),
+            horizontalAlignment = Alignment.End
+        ) {
             Box(
                 modifier = Modifier
                     .background(
@@ -61,7 +66,7 @@ fun ReceivedMessageHolder(
                     text = message,
                     style = Theme.textStyle.title.sub.copy(
                         color = Color(0xFF314158),
-                        textDirection = TextDirection.Rtl
+                        textDirection = TextDirection.Rtl,
                     ),
                     modifier = Modifier
                         .padding(16.dp)
@@ -76,7 +81,6 @@ fun ReceivedMessageHolder(
                 ),
                 modifier = Modifier
                     .padding(top = 8.dp, end = 4.dp)
-                    .align(Alignment.End)
             )
         }
         Box(
@@ -115,7 +119,9 @@ fun ReceivedMessageHolder(
 
 @Composable
 fun TypingIndicatorHolder(modifier: Modifier = Modifier){
-    Column {
+    Row(
+        modifier = modifier
+    ) {
         Box(
             modifier = Modifier
                 .height(56.dp)
@@ -131,6 +137,37 @@ fun TypingIndicatorHolder(modifier: Modifier = Modifier){
             contentAlignment = Alignment.Center
         ) {
             TypingIndicator(modifier = Modifier.padding(horizontal = 24.dp))
+        }
+        Box(
+            modifier = Modifier
+                .padding(start = 10.dp)
+                .size(32.dp)
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color(0xFF0F3A70),
+                            Color(0xFF193CB8)
+                        ),
+                        start = Offset(0f, Float.POSITIVE_INFINITY),
+                        end = Offset(Float.POSITIVE_INFINITY, 0f)
+                    ),
+                    shape = CircleShape
+                )
+                .border(
+                    width = 1.dp,
+                    color = Color(0x33FFFFFF),
+                    shape = CircleShape
+                )
+
+        ){
+            Icon(
+                painter = painterResource(id = R.drawable.ic_bot),
+                contentDescription = null,
+                tint = Color(0xFFD4AF37),
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .size(16.dp)
+            )
         }
     }
 }
@@ -177,12 +214,15 @@ private fun PreviewTyping() {
     TypingIndicatorHolder()
 }
 
-@Preview
+@Preview(
+    showSystemUi = true,
+)
 @Composable
 private fun Preview(){
     ReceivedMessageHolder(
         message = "مرحباً أمير. بناءً على تحليلي لمصاريفك في آخر 3\n" +
                 "أشهر، لاحظت أنك تنفق متوسط ",
-        time = "11:46 ص"
+        time = "11:46 ص",
+        modifier = Modifier.padding(top = 32.dp)
     )
 }

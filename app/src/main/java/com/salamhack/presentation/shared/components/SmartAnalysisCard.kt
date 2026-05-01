@@ -35,10 +35,11 @@ import com.salamhack.presentation.shared.designSystem.theme.Theme
 
 @Composable
 fun SmartAnalysisCard(
+    modifier: Modifier = Modifier,
     amount: Int,
     trackedItemTitle: String,
+    description: String = "إنفاقك على الترفيه أقل هذا الأسبوع. يمكنك إضافة ",
     onClickAdd: () -> Unit,
-    modifier: Modifier = Modifier,
 ){
     val gradient = Brush.linearGradient(
         colors = listOf(
@@ -81,77 +82,77 @@ fun SmartAnalysisCard(
                     )
                 )
                 Text(
-                    text = "إنفاقك على الترفيه أقل هذا الأسبوع. يمكنك إضافة ",
+                    text = description,
                     style = Theme.textStyle.title.sub.copy(
                         fontSize = 12.sp,
                         textDirection = TextDirection.Rtl,
                         color = Color(0xFF45556C)
                     )
                 )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Text(
-                        text = "إضافية لهدف الـ ${trackedItemTitle}!",
-                        style = Theme.textStyle.title.sub.copy(
-                            fontSize = 12.sp,
-                            textDirection = TextDirection.Rtl,
-                            color = Color(0xFF45556C)
-                        )
-                    )
-                    Surface(
-                        color = Color.White,
-                        shape = RoundedCornerShape(4.dp),
-                        tonalElevation = 2.dp,
-                        shadowElevation = 6.dp
-                    ) {
-                        Text(
-                            text = "$amount ج.م",
-                            style = Theme.textStyle.title.sub.copy(
-                                fontSize = 12.sp,
-                                textDirection = TextDirection.Rtl,
-                                color = Theme.colors.bluePrimary
-                            ),
-                            modifier = Modifier
-                                .padding(horizontal = 6.dp, vertical = 2.dp)
-                        )
-                    }
-                }
+//                Row(
+//                    verticalAlignment = Alignment.CenterVertically,
+//                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+//                ) {
+//                    Text(
+//                        text = "إضافية لهدف الـ ${trackedItemTitle}!",
+//                        style = Theme.textStyle.title.sub.copy(
+//                            fontSize = 12.sp,
+//                            textDirection = TextDirection.Rtl,
+//                            color = Color(0xFF45556C)
+//                        )
+//                    )
+//                    Surface(
+//                        color = Color.White,
+//                        shape = RoundedCornerShape(4.dp),
+//                        tonalElevation = 2.dp,
+//                        shadowElevation = 6.dp
+//                    ) {
+//                        Text(
+//                            text = "$amount ج.م",
+//                            style = Theme.textStyle.title.sub.copy(
+//                                fontSize = 12.sp,
+//                                textDirection = TextDirection.Rtl,
+//                                color = Theme.colors.bluePrimary
+//                            ),
+//                            modifier = Modifier
+//                                .padding(horizontal = 6.dp, vertical = 2.dp)
+//                        )
+//                    }
+//                }
 
-                Surface(
-                    modifier = Modifier
-                        .padding(top = 8.dp)
-                        .clickable {
-                            onClickAdd()
-                        },
-                    color = Color.White,
-                    shape = RoundedCornerShape(12.dp),
-                    tonalElevation = 2.dp,
-                    shadowElevation = 6.dp,
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
-                        modifier = Modifier
-                            .padding(horizontal = 16.dp, vertical = 6.dp)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_left_arrow),
-                            contentDescription = null,
-                            tint = Theme.colors.bluePrimary
-                        )
-                        Text(
-                            text = "إضافة للمدخرات",
-                            style = Theme.textStyle.title.sub.copy(
-                                fontSize = 12.sp,
-                                textDirection = TextDirection.Rtl,
-                                color = Theme.colors.bluePrimary
-                            ),
-                            modifier = Modifier
-                        )
-                    }
-                }
+//                Surface(
+//                    modifier = Modifier
+//                        .padding(top = 8.dp)
+//                        .clickable {
+//                            onClickAdd()
+//                        },
+//                    color = Color.White,
+//                    shape = RoundedCornerShape(12.dp),
+//                    tonalElevation = 2.dp,
+//                    shadowElevation = 6.dp,
+//                ) {
+//                    Row(
+//                        verticalAlignment = Alignment.CenterVertically,
+//                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+//                        modifier = Modifier
+//                            .padding(horizontal = 16.dp, vertical = 6.dp)
+//                    ) {
+//                        Icon(
+//                            painter = painterResource(id = R.drawable.ic_left_arrow),
+//                            contentDescription = null,
+//                            tint = Theme.colors.bluePrimary
+//                        )
+//                        Text(
+//                            text = "إضافة للمدخرات",
+//                            style = Theme.textStyle.title.sub.copy(
+//                                fontSize = 12.sp,
+//                                textDirection = TextDirection.Rtl,
+//                                color = Theme.colors.bluePrimary
+//                            ),
+//                            modifier = Modifier
+//                        )
+//                    }
+//                }
 
             }
             IconContainer(

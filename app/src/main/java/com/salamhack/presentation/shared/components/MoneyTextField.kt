@@ -1,6 +1,5 @@
 package com.salamhack.presentation.shared.components
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +19,6 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,10 +29,10 @@ import com.salamhack.presentation.shared.designSystem.theme.Theme
 @Composable
 fun MoneyTextField(
     modifier: Modifier = Modifier,
-    onTextChange: (String) -> Unit = {},
+    value: String,
+    onTextChange: (String) -> Unit,
     placeholder: String = "200.00",
 ) {
-    var textFieldValue by remember { mutableStateOf(TextFieldValue("")) }
     var isFocused by remember { mutableStateOf(false) }
 
     Box(
@@ -48,7 +46,6 @@ fun MoneyTextField(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Row(
-                modifier = Modifier,
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
@@ -57,18 +54,13 @@ fun MoneyTextField(
                     style = Theme.textStyle.title.regular.copy(
                         fontSize = 24.sp,
                         color = Color(0xFF90A1B9)
-                    ),
-                    modifier = Modifier
+                    )
                 )
                 BasicTextField(
-                    value = textFieldValue,
-                    onValueChange = { newValue ->
-                        textFieldValue = newValue
-                        onTextChange(newValue.text)
-                    },
+                    value = value,
+                    onValueChange = onTextChange,
                     singleLine = true,
                     maxLines = 1,
-                    modifier = Modifier,
                     textStyle = Theme.textStyle.header.copy(
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 48.sp,
@@ -78,36 +70,30 @@ fun MoneyTextField(
                     ),
                     cursorBrush = SolidColor(Color(0xFF1976D2)),
                     decorationBox = { innerTextField ->
-                        Box(
-                            modifier = Modifier
-                        ) {
-                            if (textFieldValue.text.isEmpty()) {
+                        Box(contentAlignment = Alignment.Center) {
+                            if (value.isEmpty()) {
                                 Text(
                                     text = placeholder,
                                     style = Theme.textStyle.header.copy(
                                         fontWeight = FontWeight.SemiBold,
                                         fontSize = 48.sp,
                                         color = Theme.colors.grayNonActive
-                                    ),
-                                    modifier = Modifier
-                                        .align(Alignment.Center)
+                                    )
                                 )
                             }
                             Box(
-                                modifier = Modifier
-                                    .width(212.dp),
+                                modifier = Modifier.width(212.dp),
+                                contentAlignment = Alignment.Center
                             ) {
                                 innerTextField()
                             }
                         }
                     }
                 )
-
             }
 
             HorizontalDivider(
-                modifier = Modifier
-                    .width(254.dp),
+                modifier = Modifier.width(254.dp),
                 thickness = 2.dp,
                 color = if (isFocused) Theme.colors.bluePrimary else Color(0xFFE2E8F0)
             )
@@ -117,8 +103,12 @@ fun MoneyTextField(
 
 @Preview(showBackground = true)
 @Composable
-private fun Preview() {
+private fun PreviewMoneyTextField() {
+    var amount by remember { mutableStateOf("") }
+
     MoneyTextField(
-        placeholder = "200.00",
+        value = amount,
+        onTextChange = { amount = it },
+        placeholder = "200.00"
     )
 }

@@ -34,7 +34,7 @@ fun TargetCard(
     saverAmount: String,
     percentage: Float,
     @DrawableRes icon: Int,
-    remainingMonths: String,
+    remainingMonths: String = "",
     description: String = "بمعدل ادخارك الحالي، ستصل لهدفك في ",
     color: Color = Color(0xFFB89020),
     isEmergency: Boolean = false
@@ -189,22 +189,22 @@ fun TargetCard(
                             .padding(horizontal = 14.dp, vertical = 17.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .padding(end = 2.dp)
-                                .background(Theme.colors.bluePrimary, shape = RoundedCornerShape(4.dp))
-                        ){
-                            Text(
-                                text = "$remainingMonths أشهر",
-                                style = Theme.textStyle.title.sub.copy(
-                                    fontSize = 12.sp,
-                                    textDirection = TextDirection.Rtl,
-                                    color = Theme.colors.white
-                                ),
-                                modifier = Modifier
-                                    .padding(vertical = 1.dp, horizontal = 6.dp)
-                            )
-                        }
+//                        Box(
+//                            modifier = Modifier
+//                                .padding(end = 2.dp)
+//                                .background(Theme.colors.bluePrimary, shape = RoundedCornerShape(4.dp))
+//                        ){
+//                            Text(
+//                                text = "$remainingMonths أشهر",
+//                                style = Theme.textStyle.title.sub.copy(
+//                                    fontSize = 12.sp,
+//                                    textDirection = TextDirection.Rtl,
+//                                    color = Theme.colors.white
+//                                ),
+//                                modifier = Modifier
+//                                    .padding(vertical = 1.dp, horizontal = 6.dp)
+//                            )
+//                        }
                         Text(
                             text = description,
                             style = Theme.textStyle.title.sub.copy(

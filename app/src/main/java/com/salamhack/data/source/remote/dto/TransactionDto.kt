@@ -1,12 +1,12 @@
 package com.salamhack.data.source.remote.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class TransactionDto(
-    val id: String,
-    val title: String,
-    val amount: Double,
-    val type: String,
-    val category: String,
-    val categoryId: String,
-    val date: String,
-    val icon: String
+    @SerializedName("id") val id: String?,
+    @SerializedName("title") val title: String?,
+    @SerializedName("amount") val amount: Double?,
+    @SerializedName("type") val type: String?,
+    @SerializedName("categoryId") val categoryId: String?,
+    @SerializedName("date") val date: String?
 )

@@ -1,5 +1,6 @@
 package com.salamhack.presentation.screen.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -18,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,6 +38,7 @@ import com.salamhack.presentation.shared.components.TargetCard
 import com.salamhack.presentation.shared.components.TotalWealth
 import com.salamhack.presentation.shared.components.TransactionItem
 import com.salamhack.presentation.shared.designSystem.theme.Theme
+import com.salamhack.presentation.uiModel.getCategoryIcon
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -177,25 +180,30 @@ fun HomeScreenContent(
                         title = goal?.title ?: "شراء MacBook Pro", // "شراء MacBook Pro"
                         targetAmount = goal?.targetAmount.toString(), // "80,000"
                         saverAmount = goal?.savedAmount.toString(), // "20,000"
-                        percentage = goal?.progress ?: 0f,
+                        percentage = (goal?.progress?.toFloat()?.times(100f)) ?: 0f, // goal?.progress ?: 0f
                         icon = R.drawable.ic_laptop,
-                        remainingMonths = goal?.message ?: "10"
+                        description = goal?.message ?: ""
                     )
                 }
-
-                item {
-                    val smartAnalysis = state.data?.smartAnalysis?.first()
-                    SmartAnalysisCard(
-                        amount = 500,
-                        trackedItemTitle = "Mackbook",
-                        onClickAdd = {}
-                    )
+                if(state.data?.smartAnalysis?.isEmpty() != true){
+                    item {
+                        val smartAnalysis = state.data?.smartAnalysis?.first()
+                        SmartAnalysisCard(
+                            description = smartAnalysis?.description ?: "إنفاقك على الترفيه أقل هذا الأسبوع. يمكنك إضافة",
+                            amount = 500,
+                            trackedItemTitle = "Mackbook",
+                            onClickAdd = {}
+                        )
+                    }
                 }
-
                 item {
                     val transactions = state.data?.transactions ?: emptyList()
 
-                    TransactionBoxHolder {
+                    TransactionBoxHolder(
+                        onClickButton = {
+                            action.onClickViewAllTransaction()
+                        }
+                    ) {
                         Column(
                             verticalArrangement = Arrangement.spacedBy(20.dp)
                         ) {
@@ -206,9 +214,27 @@ fun HomeScreenContent(
                                     time = transaction.date,
                                     title = transaction.title,
                                     category = transaction.title,
-                                    icon = R.drawable.ic_work,
-                                    isIncome = transaction.isIncome,
+                                    icon = getCategoryIcon(transaction.categoryId),
+                                    isIncome = transaction.type == "income",
                                     color = Theme.colors.bluePrimary
+                                )
+                            }
+                            OutlinedButton(
+                                onClick = {
+                                    action.onClickAddTransaction()
+                                },
+                                modifier = modifier
+                                    .fillMaxWidth(),
+                                shape = RoundedCornerShape(12.dp),
+                                border = BorderStroke(1.dp, Theme.colors.bluePrimary),
+                            ) {
+                                Text(
+                                    text = "اضافة معاملة",
+                                    style = Theme.textStyle.title.regular.copy(
+                                        color = Theme.colors.bluePrimary,
+                                    ),
+                                    modifier = Modifier
+                                        .padding(vertical = 8.dp)
                                 )
                             }
                         }
