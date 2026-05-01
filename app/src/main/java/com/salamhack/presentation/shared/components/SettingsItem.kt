@@ -72,7 +72,8 @@ fun SettingsItem(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_left_arrow),
                         contentDescription = null,
-                        tint = Color(0xFF90A1B9)
+                        tint = Color(0xFF90A1B9),
+                        modifier = Modifier.size(16.dp)
                     )
                     Box(
                         modifier = Modifier

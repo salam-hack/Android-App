@@ -145,29 +145,56 @@ fun MoreScreen(
 
                 item {
                     SettingsHolder(
+                        title = "الإعدادات العامة",
                         modifier = Modifier
                             .padding(top = 0.dp)
                     ) {
                         SettingsItem(
-                            icon = R.drawable.ic_bell,
-                            color = Theme.colors.bluePrimary,
+                            icon = R.drawable.ic_language,
+                            color = Color(0xFF45556C),
                             title = "لغة التطبيق",
                             onCheckedChange = {},
                             isCheck = true,
                             type = SettingsItemType.Language
                         )
                         SettingsItem(
-                            icon = R.drawable.ic_error,
-                            color = Color(0xFFE7000B),
+                            icon = R.drawable.ic_moon,
+                            color = Color(0xFF45556C),
                             title = "الوضع الليلي",
                             onCheckedChange = {},
                             isCheck = true,
                             type = SettingsItemType.Notification
                         )
                         SettingsItem(
-                            icon = R.drawable.ic_people,
-                            color = Color(0xFFE17100),
+                            icon = R.drawable.ic_person_avatar,
+                            color = Color(0xFF45556C),
                             title = "إدارة الحساب",
+                            onCheckedChange = {},
+                            isCheck = true,
+                            type = SettingsItemType.Normal
+                        )
+                    }
+                }
+
+                item {
+                    SettingsHolder(
+                        title = "الأمان والخصوصية",
+                        modifier = Modifier
+                            .padding(top = 0.dp)
+                    ) {
+                        SettingsItem(
+                            icon = R.drawable.ic_finger,
+                            color = Color(0xFF00C950),
+                            title = "الدخول بالبصمة / Face ID",
+                            description = "لحماية بياناتك المالية",
+                            onCheckedChange = {},
+                            isCheck = true,
+                            type = SettingsItemType.Notification
+                        )
+                        SettingsItem(
+                            icon = R.drawable.ic_shield,
+                            color = Color(0xFF45556C),
+                            title = "تغيير كلمة المرور",
                             onCheckedChange = {},
                             isCheck = true,
                             type = SettingsItemType.Normal
