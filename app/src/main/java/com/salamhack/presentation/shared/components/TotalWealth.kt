@@ -33,6 +33,7 @@ fun TotalWealth(
     title: String,
     amountText: String,
     currencyText: String,
+    secondCurrencyText: String = "ج.م",
     incomeLabel: String,
     incomeAmountText: String,
     expenseLabel: String,
@@ -151,7 +152,8 @@ fun TotalWealth(
                     bubbleColor = expenseColor.copy(alpha = 0.10f),
                     iconTint = expenseColor,
                     icon = expenseIcon,
-                    appendCurrency = !isHidden
+                    appendCurrency = !isHidden,
+                    currencyText = secondCurrencyText
                 )
 
                 Box(
@@ -169,7 +171,8 @@ fun TotalWealth(
                     bubbleColor = incomeColor.copy(alpha = 0.10f),
                     iconTint = incomeColor,
                     icon = incomeIcon,
-                    appendCurrency = !isHidden
+                    appendCurrency = !isHidden,
+                    currencyText = secondCurrencyText
                 )
             }
         }
@@ -186,6 +189,7 @@ private fun BottomStat(
     iconTint: Color,
     @DrawableRes icon: Int,
     appendCurrency: Boolean,
+    currencyText: String = "ج.م",
 ) {
     Row(
         modifier = modifier.padding(horizontal = 6.dp),
@@ -206,7 +210,7 @@ private fun BottomStat(
             )
             Spacer(modifier = Modifier.height(4.dp))
 
-            val valueText = if (appendCurrency) "$value ج.م" else value
+            val valueText = if (appendCurrency) "$value $currencyText" else value
 
             Text(
                 text = valueText,

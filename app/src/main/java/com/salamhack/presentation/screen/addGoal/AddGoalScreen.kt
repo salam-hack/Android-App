@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,9 +28,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.salamhack.R
+import com.salamhack.presentation.shared.components.AppButton
+import com.salamhack.presentation.shared.components.AppButtonType
 import com.salamhack.presentation.shared.components.GoalIcon
 import com.salamhack.presentation.shared.components.GoalIconSelector
 import com.salamhack.presentation.shared.components.MoneyTextField
+import com.salamhack.presentation.shared.components.PriorityLevel
+import com.salamhack.presentation.shared.components.PrioritySelector
+import com.salamhack.presentation.shared.components.TargetDateSelector
+import com.salamhack.presentation.shared.components.TargetDateUiState
 import com.salamhack.presentation.shared.components.TransactionNoteTextField
 import com.salamhack.presentation.shared.designSystem.theme.Theme
 
@@ -111,7 +118,7 @@ fun AddGoalScreenContent(
                 .background(Color.White)
                 .align(Alignment.BottomCenter)
                 .padding(horizontal = 16.dp)
-                .fillMaxHeight(0.8f)
+                .fillMaxHeight(0.85f)
         ) {
             LazyColumn(
                 modifier = Modifier
@@ -161,6 +168,54 @@ fun AddGoalScreenContent(
                         )
                     }
                 }
+                item {
+                    TargetDateSelector(
+                        title = "تاريخ التحقيق المتوقع",
+                        state = TargetDateUiState(
+                            dateText = "ديسمبر 2025",
+                            remainingTimeText = "متبقي 20 شهر"
+                        ),
+                        onDateSelected = {  },
+                        modifier = Modifier
+                            .padding(top = 24.dp),
+                    )
+                }
+                item {
+                    PrioritySelector(
+                        selectedPriority = PriorityLevel.HIGH,
+                        onPrioritySelected = {},
+                        modifier = Modifier
+                            .padding(top = 24.dp)
+                    )
+                }
+            }
+        }
+
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 24.dp)
+                .fillMaxWidth()
+                .background(Theme.colors.white)
+        ){
+            Column(
+                modifier = Modifier
+            ) {
+                HorizontalDivider(
+                    thickness = 2.dp,
+                    color = Color(0xFFF1F5F9),
+                    modifier = Modifier
+                )
+
+                AppButton(
+                    text = "انشاء الهدف",
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .padding(top = 16.dp),
+                    type = AppButtonType.Primary,
+                    onClick = {},
+                    isLoading = false,
+                )
             }
         }
     }

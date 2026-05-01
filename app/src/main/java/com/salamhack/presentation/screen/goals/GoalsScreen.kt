@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.salamhack.R
 import com.salamhack.presentation.shared.components.SmartAnalysisAlertCard
-import com.salamhack.presentation.shared.components.SmartAnalysisCard
 import com.salamhack.presentation.shared.components.TargetCard
 import com.salamhack.presentation.shared.components.TotalWealth
 import com.salamhack.presentation.shared.designSystem.theme.Theme
